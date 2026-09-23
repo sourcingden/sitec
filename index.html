@@ -2,7 +2,7 @@
 <html lang="en" data-mode="day">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>sourcingdenis / diskevich</title>
 <meta name="description" content="Finds people by day. Finds the drop by night. Sourcing — and DJing as diskevich.">
 <meta property="og:title" content="sourcingdenis / diskevich">
@@ -34,6 +34,7 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   html, body { height: 100%; }
   body {
     background: var(--bg);
@@ -41,16 +42,23 @@
     font-family: "Space Grotesk", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
   }
   a { color: inherit; text-decoration: none; }
   .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
 
   .page {
+    min-height: 100vh;
     min-height: 100svh;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    padding: var(--gutter);
+    padding:
+      max(var(--gutter), env(safe-area-inset-top))
+      max(var(--gutter), env(safe-area-inset-right))
+      max(var(--gutter), env(safe-area-inset-bottom))
+      max(var(--gutter), env(safe-area-inset-left));
     gap: 24px;
+    overflow-x: clip;
   }
 
   /* ---------- top bar ---------- */
@@ -64,6 +72,8 @@
     text-transform: uppercase;
   }
   .shift b { color: var(--fg); font-weight: 500; }
+  .hint { display: none; }
+  @media (hover: none) and (pointer: coarse) { .hint { display: inline; } }
 
   .toggle {
     --size: 56px;
@@ -75,9 +85,11 @@
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    flex: none;
+    touch-action: manipulation;
     transition: transform .3s ease;
   }
-  .toggle:hover { transform: rotate(-20deg) scale(1.05); }
+  .toggle:active { transform: scale(.92); }
   .toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
   /* half-filled disc: turns into a record at night */
   .toggle::before {
@@ -91,8 +103,8 @@
     content: "";
     position: absolute;
     inset: 50%;
-    width: 10px; height: 10px;
-    margin: -5px;
+    width: 18%; height: 18%;
+    margin: -9%;
     border-radius: 50%;
     background: var(--accent);
     transform: scale(0);
@@ -123,7 +135,7 @@
 
   h1 {
     font-weight: 700;
-    font-size: clamp(40px, 11.5vw, 190px);
+    font-size: var(--name-size, clamp(34px, 11vw, 190px));
     line-height: .9;
     letter-spacing: -0.055em;
     white-space: nowrap;
@@ -184,9 +196,8 @@
     font-size: 17px;
     transition: background .25s ease, color .25s ease;
   }
-  .cta:hover, .cta:focus-visible { background: var(--accent); color: #fff; outline: none; }
+  .cta:focus-visible, .cta:active { background: var(--accent); color: #fff; outline: none; }
   .cta .arrow { transition: transform .25s ease; }
-  .cta:hover .arrow { transform: translate(3px, -3px); }
 
   /* ---------- footer ---------- */
   .foot {
@@ -210,18 +221,76 @@
     transform-origin: left;
     transition: transform .25s ease;
   }
-  .links a:hover::after, .links a:focus-visible::after { transform: scaleX(1); }
+  .links a:focus-visible::after { transform: scaleX(1); }
+
+  /* hover effects only where a real pointer exists, so they never stick after a tap */
+  @media (hover: hover) and (pointer: fine) {
+    .toggle:hover { transform: rotate(-20deg) scale(1.05); }
+    .cta:hover { background: var(--accent); color: #fff; }
+    .cta:hover .arrow { transform: translate(3px, -3px); }
+    .links a:hover::after { transform: scaleX(1); }
+  }
   .links .hi { color: var(--accent); }
 
   /* ---------- day/night reveal ---------- */
   ::view-transition-old(root),
   ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
 
+  /* touch screens: 44px+ hit areas without changing the visual rhythm */
+  @media (pointer: coarse) {
+    .links { margin: -15px 0; }
+    .links a { padding: 15px 0; }
+    .links a::after { bottom: 12px; }
+  }
+
   @media (max-width: 560px) {
+    .page { gap: 16px; }
     .toggle { --size: 48px; }
-    .row { flex-direction: column; align-items: flex-start; }
-    .cta { width: 100%; justify-content: center; }
-    .foot { flex-direction: column; align-items: flex-start; }
+    .hero { align-self: end; padding-bottom: 8px; } /* keep the CTA in thumb reach */
+    .row { flex-direction: column; align-items: stretch; }
+    .cta { justify-content: center; min-height: 56px; font-size: 18px; }
+    .foot { flex-direction: column; align-items: stretch; gap: 12px; }
+    .links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin: 0;
+      border-top: 1px solid var(--line);
+    }
+    .links a {
+      display: flex;
+      align-items: center;
+      min-height: 48px;
+      padding: 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+    .links a:nth-child(odd) { border-right: 1px solid var(--line); }
+    .links a:nth-child(even) { padding-left: 16px; }
+  }
+
+  /* tall portrait phones: the disc becomes the centerpiece instead of empty space */
+  @media (max-width: 560px) and (min-height: 700px) and (orientation: portrait) {
+    .top { flex-direction: column; align-items: stretch; }
+    .toggle {
+      --size: min(62vw, 30svh);
+      align-self: center;
+      margin-top: 5svh;
+      border-width: 1.5px;
+    }
+    [data-mode="night"] .toggle::before {
+      background: repeating-radial-gradient(circle, var(--fg) 0 1px, transparent 1px 6px);
+    }
+    .links a::after { display: none; }
+  }
+
+  /* phones in landscape: little height, so tighten vertical rhythm */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .page { gap: 12px; }
+    .toggle { --size: 44px; }
+    .hero { gap: 14px; }
+    .row { padding-top: 14px; }
+    .cta { padding: 12px 22px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -232,7 +301,7 @@
 <body>
 <div class="page">
   <header class="top mono">
-    <span class="shift">Shift: <b id="shift">day</b></span>
+    <span class="shift">Shift: <b id="shift">day</b><span class="hint"> · swipe ⇄</span></span>
     <button class="toggle" id="toggle" type="button" aria-label="Switch to night mode"></button>
   </header>
 
@@ -261,7 +330,7 @@
   const MODES = {
     day: {
       name: "sourcingdenis",
-      kicker: '<span class="query">(sourcing OR recruiting) AND people</span> — 1 result',
+      kicker: '<span class="query">(sourcing OR recruiting) AND people</span> <span style="white-space:nowrap">— 1 result</span>',
       tagline: 'Finds people. <span class="by">By day.</span>',
       cta: "LinkedIn",
       href: "https://linkedin.com/in/sourcingdenis",
@@ -328,14 +397,39 @@
 
   render(initialMode(), false);
 
+  // Fit the headline to the screen: sized by the longest alias so the name
+  // keeps one size across shifts, and capped by height for landscape phones.
+  const h1 = document.querySelector("h1");
+  const probe = h1.cloneNode(true);
+  probe.removeAttribute("id");
+  probe.querySelector("#name").removeAttribute("id");
+  probe.setAttribute("aria-hidden", "true");
+  Object.assign(probe.style, { position: "absolute", visibility: "hidden", left: "-9999px", fontSize: "100px", animation: "none" });
+  document.body.appendChild(probe);
+  const longest = Object.values(MODES).map((m) => m.name).sort((a, b) => b.length - a.length)[0];
+  function fitName() {
+    probe.firstChild.textContent = longest;
+    const avail = h1.parentElement.clientWidth;
+    const byWidth = (avail / probe.scrollWidth) * 100 * 0.97;
+    const byHeight = innerHeight * (innerWidth > innerHeight && innerHeight < 500 ? 0.24 : 0.3);
+    root.style.setProperty("--name-size", Math.min(byWidth, byHeight, 190).toFixed(1) + "px");
+  }
+  fitName();
+  addEventListener("resize", fitName);
+  if (document.fonts) document.fonts.ready.then(fitName);
+
   $("toggle").addEventListener("click", (e) => {
+    const b = e.currentTarget.getBoundingClientRect();
+    // keyboard activation has no pointer coords: start the reveal from the toggle itself
+    switchShift(e.clientX || b.left + b.width / 2, e.clientY || b.top + b.height / 2);
+  });
+
+  function switchShift(x, y) {
     const next = root.dataset.mode === "day" ? "night" : "day";
     try { localStorage.setItem("mode", next); } catch (err) {}
 
     if (!document.startViewTransition || reduced) { render(next, true); return; }
 
-    const x = e.clientX || innerWidth - 40;
-    const y = e.clientY || 40;
     const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
     const t = document.startViewTransition(() => render(next, true));
     t.ready.then(() => {
@@ -344,7 +438,16 @@
         { duration: 700, easing: "cubic-bezier(.7,0,.2,1)", pseudoElement: "::view-transition-new(root)" }
       );
     });
-  });
+  }
+
+  // Swipe sideways anywhere to change shift (mobile)
+  let sx = 0, sy = 0;
+  addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  addEventListener("touchend", (e) => {
+    const t = e.changedTouches[0];
+    const dx = t.clientX - sx, dy = t.clientY - sy;
+    if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 2) switchShift(t.clientX, t.clientY);
+  }, { passive: true });
 
   // Kyiv clock with a status line
   const fmt = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Kyiv", hour: "2-digit", minute: "2-digit", hour12: false });
