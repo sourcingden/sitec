@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en" data-mode="day">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sourcingdenis / diskevich</title>
+<meta name="description" content="Finds people by day. Finds the drop by night. Sourcing — and DJing as diskevich.">
+<meta property="og:title" content="sourcingdenis / diskevich">
+<meta property="og:description" content="Finds people by day. Finds the drop by night.">
+<meta property="og:image" content="og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23111'/><path d='M16 1a15 15 0 0 1 0 30z' fill='%23fff'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #0d0d0d;
+    --muted: #7a7a7a;
+    --line: #e6e6e6;
+    --accent: #1f5eff;
+    --beat: 0.484s; /* 124 BPM */
+    --gutter: clamp(16px, 4vw, 48px);
+  }
+  :root[data-mode="night"] {
+    --bg: #0b0b0b;
+    --fg: #f4f4f4;
+    --muted: #8a8a8a;
+    --line: #232323;
+    --accent: #ff5a1f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+  .page {
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: var(--gutter);
+    gap: 24px;
+  }
+
+  /* ---------- top bar ---------- */
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .shift b { color: var(--fg); font-weight: 500; }
+
+  .toggle {
+    --size: 56px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    border: 1px solid var(--fg);
+    background: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform .3s ease;
+  }
+  .toggle:hover { transform: rotate(-20deg) scale(1.05); }
+  .toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  /* half-filled disc: turns into a record at night */
+  .toggle::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 50%, var(--fg) 50%);
+    transition: transform .6s cubic-bezier(.7,0,.2,1);
+  }
+  .toggle::after {
+    content: "";
+    position: absolute;
+    inset: 50%;
+    width: 10px; height: 10px;
+    margin: -5px;
+    border-radius: 50%;
+    background: var(--accent);
+    transform: scale(0);
+    transition: transform .4s ease .2s;
+  }
+  [data-mode="night"] .toggle::before {
+    background: repeating-radial-gradient(circle, var(--fg) 0 1px, transparent 1px 4px);
+    opacity: .5;
+  }
+  [data-mode="night"] .toggle::after { transform: scale(1); }
+  [data-mode="night"] .toggle { animation: spin 1.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- hero ---------- */
+  .hero {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3vw, 36px);
+    min-width: 0;
+  }
+  .kicker {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: .04em;
+  }
+  .kicker .query { color: var(--accent); }
+
+  h1 {
+    font-weight: 700;
+    font-size: clamp(40px, 11.5vw, 190px);
+    line-height: .9;
+    letter-spacing: -0.055em;
+    white-space: nowrap;
+    display: flex;
+    align-items: flex-end;
+    transform-origin: left bottom;
+  }
+  h1 .caret {
+    display: inline-block;
+    width: .08em;
+    height: .78em;
+    margin-left: .06em;
+    margin-bottom: .04em;
+    background: var(--accent);
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  [data-mode="night"] h1 { animation: pulse var(--beat) ease-out infinite; }
+  [data-mode="night"] h1 .caret {
+    animation: none;
+    border-radius: 50%;
+    width: .16em;
+    height: .16em;
+    margin-bottom: .1em;
+  }
+  @keyframes pulse {
+    0%   { transform: scale(1.012); }
+    40%  { transform: scale(1); }
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 32px;
+    border-top: 1px solid var(--line);
+    padding-top: clamp(20px, 3vw, 32px);
+  }
+  .tagline {
+    font-size: clamp(20px, 2.6vw, 34px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .tagline .by { color: var(--muted); }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 26px;
+    border-radius: 999px;
+    background: var(--fg);
+    color: var(--bg);
+    font-weight: 500;
+    font-size: 17px;
+    transition: background .25s ease, color .25s ease;
+  }
+  .cta:hover, .cta:focus-visible { background: var(--accent); color: #fff; outline: none; }
+  .cta .arrow { transition: transform .25s ease; }
+  .cta:hover .arrow { transform: translate(3px, -3px); }
+
+  /* ---------- footer ---------- */
+  .foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .links a { color: var(--fg); position: relative; }
+  .links a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -3px;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .25s ease;
+  }
+  .links a:hover::after, .links a:focus-visible::after { transform: scaleX(1); }
+  .links .hi { color: var(--accent); }
+
+  /* ---------- day/night reveal ---------- */
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+
+  @media (max-width: 560px) {
+    .toggle { --size: 48px; }
+    .row { flex-direction: column; align-items: flex-start; }
+    .cta { width: 100%; justify-content: center; }
+    .foot { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top mono">
+    <span class="shift">Shift: <b id="shift">day</b></span>
+    <button class="toggle" id="toggle" type="button" aria-label="Switch to night mode"></button>
+  </header>
+
+  <main class="hero">
+    <p class="kicker mono" id="kicker"></p>
+    <h1><span id="name" aria-live="polite">sourcingdenis</span><span class="caret" aria-hidden="true"></span></h1>
+    <div class="row">
+      <p class="tagline" id="tagline"></p>
+      <a class="cta" id="cta" target="_blank" rel="noopener"><span id="cta-label"></span><span class="arrow" aria-hidden="true">↗</span></a>
+    </div>
+  </main>
+
+  <footer class="foot mono">
+    <span id="clock">Kyiv</span>
+    <nav class="links" aria-label="Contacts">
+      <a class="hi" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Say hi →</a>
+      <a href="https://linkedin.com/in/sourcingdenis" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://soundcloud.com/diskevich" target="_blank" rel="noopener">SoundCloud</a>
+      <a href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Telegram</a>
+    </nav>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const MODES = {
+    day: {
+      name: "sourcingdenis",
+      kicker: '<span class="query">(sourcing OR recruiting) AND people</span> — 1 result',
+      tagline: 'Finds people. <span class="by">By day.</span>',
+      cta: "LinkedIn",
+      href: "https://linkedin.com/in/sourcingdenis",
+      theme: "#ffffff",
+    },
+    night: {
+      name: "diskevich",
+      kicker: '<span class="query">now playing</span> — 124 bpm',
+      tagline: 'Finds the drop. <span class="by">By night.</span>',
+      cta: "SoundCloud",
+      href: "https://soundcloud.com/diskevich",
+      theme: "#0b0b0b",
+    },
+  };
+
+  const root = document.documentElement;
+  const $ = (id) => document.getElementById(id);
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const GLYPHS = "abcdefghijklmnopqrstuvwxyz";
+  let scrambleTimer = null;
+
+  function scramble(el, to) {
+    clearInterval(scrambleTimer);
+    const from = el.textContent;
+    if (reduced) { el.textContent = to; return; }
+    const len = Math.max(from.length, to.length);
+    let frame = 0;
+    const total = 18;
+    scrambleTimer = setInterval(() => {
+      frame++;
+      let out = "";
+      for (let i = 0; i < len; i++) {
+        const settleAt = Math.floor((i / len) * total * 0.7) + 5;
+        if (frame >= settleAt) out += to[i] || "";
+        else out += GLYPHS[(Math.random() * GLYPHS.length) | 0];
+      }
+      el.textContent = out;
+      if (frame >= total) { clearInterval(scrambleTimer); el.textContent = to; }
+    }, 32);
+  }
+
+  function render(mode, animateName) {
+    const m = MODES[mode];
+    root.dataset.mode = mode;
+    $("shift").textContent = mode;
+    $("kicker").innerHTML = m.kicker;
+    $("tagline").innerHTML = m.tagline;
+    $("cta-label").textContent = m.cta;
+    $("cta").href = m.href;
+    $("toggle").setAttribute("aria-label", `Switch to ${mode === "day" ? "night" : "day"} mode`);
+    document.querySelector('meta[name="theme-color"]').content = m.theme;
+    if (animateName) scramble($("name"), m.name);
+    else $("name").textContent = m.name;
+  }
+
+  function initialMode() {
+    try {
+      const saved = localStorage.getItem("mode");
+      if (saved === "day" || saved === "night") return saved;
+    } catch (e) {}
+    const h = new Date().getHours();
+    return h >= 20 || h < 7 ? "night" : "day";
+  }
+
+  render(initialMode(), false);
+
+  $("toggle").addEventListener("click", (e) => {
+    const next = root.dataset.mode === "day" ? "night" : "day";
+    try { localStorage.setItem("mode", next); } catch (err) {}
+
+    if (!document.startViewTransition || reduced) { render(next, true); return; }
+
+    const x = e.clientX || innerWidth - 40;
+    const y = e.clientY || 40;
+    const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    const t = document.startViewTransition(() => render(next, true));
+    t.ready.then(() => {
+      root.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${r}px at ${x}px ${y}px)`] },
+        { duration: 700, easing: "cubic-bezier(.7,0,.2,1)", pseudoElement: "::view-transition-new(root)" }
+      );
+    });
+  });
+
+  // Kyiv clock with a status line
+  const fmt = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Kyiv", hour: "2-digit", minute: "2-digit", hour12: false });
+  function tick() {
+    const time = fmt.format(new Date());
+    const h = parseInt(time, 10);
+    let status = "probably asleep";
+    if (h >= 9 && h < 19) status = "probably sourcing";
+    else if (h >= 19 || h < 3) status = "probably mixing";
+    $("clock").textContent = `Kyiv, ${time} — ${status}`;
+  }
+  tick();
+  setInterval(tick, 15000);
+})();
+</script>
+</body>
+</html>
