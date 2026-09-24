@@ -1,470 +1,192 @@
 <!doctype html>
-<html lang="en" data-mode="day">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>sourcingdenis / diskevich</title>
-<meta name="description" content="Finds people by day. Finds the drop by night. Sourcing — and DJing as diskevich.">
+<title>sourcingdenis / diskevich — sourcing by day, DJ by night</title>
+<meta name="description" content="Den's corner of the internet: sourcing playbooks, dashboards and AI in hiring by day, DJ mixes as diskevich by night.">
+<meta name="author" content="Den">
+<meta property="og:type" content="website">
 <meta property="og:title" content="sourcingdenis / diskevich">
-<meta property="og:description" content="Finds people by day. Finds the drop by night.">
-<meta property="og:image" content="https://sourcingden.github.io/sitec/og.png">
+<meta property="og:description" content="Sourcing playbooks, AI in hiring, and DJ mixes.">
 <meta property="og:url" content="https://sourcingden.github.io/sitec/">
+<meta property="og:image" content="https://sourcingden.github.io/sitec/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://sourcingden.github.io/sitec/og.png">
 <link rel="canonical" href="https://sourcingden.github.io/sitec/">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#ffffff">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23111'/><path d='M16 1a15 15 0 0 1 0 30z' fill='%23fff'/></svg>">
+<meta name="theme-color" content="#f4f1e9">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23141414'/><circle cx='16' cy='16' r='6' fill='%23ff5a1f'/><circle cx='16' cy='16' r='1.2' fill='%23141414'/></svg>">
+<script>
+  // Apply the theme before first paint to avoid a flash
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("theme"); } catch (e) {}
+    if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #ffffff;
-    --fg: #0d0d0d;
-    --muted: #7a7a7a;
-    --line: #e6e6e6;
-    --accent: #1f5eff;
-    --beat: 0.484s; /* 124 BPM */
-    --gutter: clamp(16px, 4vw, 48px);
-  }
-  :root[data-mode="night"] {
-    --bg: #0b0b0b;
-    --fg: #f4f4f4;
-    --muted: #8a8a8a;
-    --line: #232323;
-    --accent: #ff5a1f;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-  html, body { height: 100%; }
-  body {
-    background: var(--bg);
-    color: var(--fg);
-    font-family: "Space Grotesk", system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-    -webkit-tap-highlight-color: transparent;
-  }
-  a { color: inherit; text-decoration: none; }
-  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
-
-  .page {
-    min-height: 100vh;
-    min-height: 100svh;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    padding:
-      max(var(--gutter), env(safe-area-inset-top))
-      max(var(--gutter), env(safe-area-inset-right))
-      max(var(--gutter), env(safe-area-inset-bottom))
-      max(var(--gutter), env(safe-area-inset-left));
-    gap: 24px;
-    overflow-x: clip;
-  }
-
-  /* ---------- top bar ---------- */
-  .top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
-    color: var(--muted);
-    letter-spacing: .04em;
-    text-transform: uppercase;
-  }
-  .shift b { color: var(--fg); font-weight: 500; }
-  .hint { display: none; }
-  @media (hover: none) and (pointer: coarse) { .hint { display: inline; } }
-
-  .toggle {
-    --size: 56px;
-    width: var(--size);
-    height: var(--size);
-    border-radius: 50%;
-    border: 1px solid var(--fg);
-    background: none;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    flex: none;
-    touch-action: manipulation;
-    transition: transform .3s ease;
-  }
-  .toggle:active { transform: scale(.92); }
-  .toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-  /* half-filled disc: turns into a record at night */
-  .toggle::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent 50%, var(--fg) 50%);
-    transition: transform .6s cubic-bezier(.7,0,.2,1);
-  }
-  .toggle::after {
-    content: "";
-    position: absolute;
-    inset: 50%;
-    width: 18%; height: 18%;
-    margin: -9%;
-    border-radius: 50%;
-    background: var(--accent);
-    transform: scale(0);
-    transition: transform .4s ease .2s;
-  }
-  [data-mode="night"] .toggle::before {
-    background: repeating-radial-gradient(circle, var(--fg) 0 1px, transparent 1px 4px);
-    opacity: .5;
-  }
-  [data-mode="night"] .toggle::after { transform: scale(1); }
-  [data-mode="night"] .toggle { animation: spin 1.8s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* ---------- hero ---------- */
-  .hero {
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(20px, 3vw, 36px);
-    min-width: 0;
-  }
-  .kicker {
-    font-size: 13px;
-    color: var(--muted);
-    letter-spacing: .04em;
-  }
-  .kicker .query { color: var(--accent); }
-
-  h1 {
-    font-weight: 700;
-    font-size: var(--name-size, clamp(34px, 11vw, 190px));
-    line-height: .9;
-    letter-spacing: -0.055em;
-    white-space: nowrap;
-    display: flex;
-    align-items: flex-end;
-    transform-origin: left bottom;
-  }
-  h1 .caret {
-    display: inline-block;
-    width: .08em;
-    height: .78em;
-    margin-left: .06em;
-    margin-bottom: .04em;
-    background: var(--accent);
-    animation: blink 1s steps(1) infinite;
-  }
-  @keyframes blink { 50% { opacity: 0; } }
-
-  [data-mode="night"] h1 { animation: pulse var(--beat) ease-out infinite; }
-  [data-mode="night"] h1 .caret {
-    animation: none;
-    border-radius: 50%;
-    width: .16em;
-    height: .16em;
-    margin-bottom: .1em;
-  }
-  @keyframes pulse {
-    0%   { transform: scale(1.012); }
-    40%  { transform: scale(1); }
-  }
-
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px 32px;
-    border-top: 1px solid var(--line);
-    padding-top: clamp(20px, 3vw, 32px);
-  }
-  .tagline {
-    font-size: clamp(20px, 2.6vw, 34px);
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-  }
-  .tagline .by { color: var(--muted); }
-
-  .cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 26px;
-    border-radius: 999px;
-    background: var(--fg);
-    color: var(--bg);
-    font-weight: 500;
-    font-size: 17px;
-    transition: background .25s ease, color .25s ease;
-  }
-  .cta:focus-visible, .cta:active { background: var(--accent); color: #fff; outline: none; }
-  .cta .arrow { transition: transform .25s ease; }
-
-  /* ---------- footer ---------- */
-  .foot {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 16px;
-    font-size: 13px;
-    color: var(--muted);
-  }
-  .links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
-  .links a { color: var(--fg); position: relative; }
-  .links a::after {
-    content: "";
-    position: absolute;
-    left: 0; right: 0; bottom: -3px;
-    height: 1px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform .25s ease;
-  }
-  .links a:focus-visible::after { transform: scaleX(1); }
-
-  /* hover effects only where a real pointer exists, so they never stick after a tap */
-  @media (hover: hover) and (pointer: fine) {
-    .toggle:hover { transform: rotate(-20deg) scale(1.05); }
-    .cta:hover { background: var(--accent); color: #fff; }
-    .cta:hover .arrow { transform: translate(3px, -3px); }
-    .links a:hover::after { transform: scaleX(1); }
-  }
-  .links .hi { color: var(--accent); }
-
-  /* ---------- day/night reveal ---------- */
-  ::view-transition-old(root),
-  ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
-
-  /* touch screens: 44px+ hit areas without changing the visual rhythm */
-  @media (pointer: coarse) {
-    .links { margin: -15px 0; }
-    .links a { padding: 15px 0; }
-    .links a::after { bottom: 12px; }
-  }
-
-  @media (max-width: 560px) {
-    .page { gap: 16px; }
-    .toggle { --size: 48px; }
-    .hero { align-self: end; padding-bottom: 8px; } /* keep the CTA in thumb reach */
-    .row { flex-direction: column; align-items: stretch; }
-    .cta { justify-content: center; min-height: 56px; font-size: 18px; }
-    .foot { flex-direction: column; align-items: stretch; gap: 12px; }
-    .links {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      margin: 0;
-      border-top: 1px solid var(--line);
-    }
-    .links a {
-      display: flex;
-      align-items: center;
-      min-height: 48px;
-      padding: 0;
-      border-bottom: 1px solid var(--line);
-      font-size: 14px;
-    }
-    .links a:nth-child(odd) { border-right: 1px solid var(--line); }
-    .links a:nth-child(even) { padding-left: 16px; }
-  }
-
-  /* tall portrait phones: the disc becomes the centerpiece instead of empty space */
-  @media (max-width: 560px) and (min-height: 700px) and (orientation: portrait) {
-    .top { flex-direction: column; align-items: stretch; }
-    .toggle {
-      --size: min(62vw, 30svh);
-      align-self: center;
-      margin-top: 5svh;
-      border-width: 1.5px;
-    }
-    [data-mode="night"] .toggle::before {
-      background: repeating-radial-gradient(circle, var(--fg) 0 1px, transparent 1px 6px);
-    }
-    .links a::after { display: none; }
-  }
-
-  /* phones in landscape: little height, so tighten vertical rhythm */
-  @media (max-height: 500px) and (orientation: landscape) {
-    .page { gap: 12px; }
-    .toggle { --size: 44px; }
-    .hero { gap: 14px; }
-    .row { padding-top: 14px; }
-    .cta { padding: 12px 22px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation: none !important; transition: none !important; }
-  }
-</style>
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Den",
+  "alternateName": ["sourcingdenis", "diskevich"],
+  "jobTitle": "Sourcing & Recruiting Lead",
+  "url": "https://sourcingden.github.io/sitec/",
+  "sameAs": [
+    "https://linkedin.com/in/sourcingdenis",
+    "https://soundcloud.com/diskevich",
+    "https://t.me/sourcingdenis"
+  ]
+}
+</script>
 </head>
-<body>
-<div class="page">
-  <header class="top mono">
-    <span class="shift">Shift: <b id="shift">day</b><span class="hint"> · swipe ⇄</span></span>
-    <button class="toggle" id="toggle" type="button" aria-label="Switch to night mode"></button>
-  </header>
-
-  <main class="hero">
-    <p class="kicker mono" id="kicker"></p>
-    <h1><span id="name" aria-live="polite">sourcingdenis</span><span class="caret" aria-hidden="true"></span></h1>
-    <div class="row">
-      <p class="tagline" id="tagline"></p>
-      <a class="cta" id="cta" target="_blank" rel="noopener"><span id="cta-label"></span><span class="arrow" aria-hidden="true">↗</span></a>
-    </div>
-  </main>
-
-  <footer class="foot mono">
-    <span id="clock">Kyiv</span>
-    <nav class="links" aria-label="Contacts">
-      <a class="hi" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Say hi →</a>
-      <a href="https://linkedin.com/in/sourcingdenis" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://soundcloud.com/diskevich" target="_blank" rel="noopener">SoundCloud</a>
-      <a href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Telegram</a>
-    </nav>
-  </footer>
+<body id="top">
+<div class="stars" aria-hidden="true">
+  <div class="stars-layer" data-speed="0.02"></div>
+  <div class="stars-layer" data-speed="0.05"></div>
+  <div class="stars-layer" data-speed="0.08"></div>
 </div>
 
-<script>
-(() => {
-  const MODES = {
-    day: {
-      name: "sourcingdenis",
-      kicker: '<span class="query">(sourcing OR recruiting) AND people</span> <span style="white-space:nowrap">— 1 result</span>',
-      tagline: 'Finds people. <span class="by">By day.</span>',
-      cta: "LinkedIn",
-      href: "https://linkedin.com/in/sourcingdenis",
-      theme: "#ffffff",
-    },
-    night: {
-      name: "diskevich",
-      kicker: '<span class="query">now playing</span> — 124 bpm',
-      tagline: 'Finds the drop. <span class="by">By night.</span>',
-      cta: "SoundCloud",
-      href: "https://soundcloud.com/diskevich",
-      theme: "#0b0b0b",
-    },
-  };
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme"></button>
 
-  const root = document.documentElement;
-  const $ = (id) => document.getElementById(id);
-  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const GLYPHS = "abcdefghijklmnopqrstuvwxyz";
-  let scrambleTimer = null;
+<main class="page">
+  <div class="hero">
+    <div class="record" id="record" role="button" tabindex="0" aria-label="Vinyl record. Drag to scratch, tap to change the label.">
+      <svg viewBox="-130 -130 260 260" aria-hidden="true">
+        <defs>
+          <radialGradient id="vinyl" r="0.5">
+            <stop offset="0.3" stop-color="#1c1c1c"/>
+            <stop offset="1" stop-color="#0a0a0a"/>
+          </radialGradient>
+          <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0.25" stop-color="#fff" stop-opacity="0"/>
+            <stop offset="0.45" stop-color="#fff" stop-opacity="0.12"/>
+            <stop offset="0.5" stop-color="#fff" stop-opacity="0"/>
+            <stop offset="0.75" stop-color="#fff" stop-opacity="0.07"/>
+            <stop offset="0.8" stop-color="#fff" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <g id="disc">
+          <circle r="124" fill="url(#vinyl)"/>
+          <g id="grooves" fill="none" stroke="#fff" stroke-opacity="0.07"></g>
+          <circle r="124" fill="none" stroke="#000" stroke-width="2"/>
+          <g id="label"></g>
+        </g>
+        <circle r="124" fill="url(#sheen)" pointer-events="none"/>
+        <circle class="hole" r="2.6"/>
+      </svg>
+    </div>
+    <p class="record-caption mono" id="record-caption">33⅓ rpm · drag to scratch · tap to flip</p>
+  </div>
 
-  function scramble(el, to) {
-    clearInterval(scrambleTimer);
-    const from = el.textContent;
-    if (reduced) { el.textContent = to; return; }
-    const len = Math.max(from.length, to.length);
-    let frame = 0;
-    const total = 18;
-    scrambleTimer = setInterval(() => {
-      frame++;
-      let out = "";
-      for (let i = 0; i < len; i++) {
-        const settleAt = Math.floor((i / len) * total * 0.7) + 5;
-        if (frame >= settleAt) out += to[i] || "";
-        else out += GLYPHS[(Math.random() * GLYPHS.length) | 0];
-      }
-      el.textContent = out;
-      if (frame >= total) { clearInterval(scrambleTimer); el.textContent = to; }
-    }, 32);
-  }
+  <h1>Den — sourcing by day, DJ by night</h1>
+  <p class="lede">Sourcing &amp; recruiting lead as <strong>sourcingdenis</strong>, DJ as <strong>diskevich</strong>. Here are the methods I use to find people, the dashboards I build around hiring, and the mixes I play after hours.</p>
 
-  function render(mode, animateName) {
-    const m = MODES[mode];
-    root.dataset.mode = mode;
-    $("shift").textContent = mode;
-    $("kicker").innerHTML = m.kicker;
-    $("tagline").innerHTML = m.tagline;
-    $("cta-label").textContent = m.cta;
-    $("cta").href = m.href;
-    $("toggle").setAttribute("aria-label", `Switch to ${mode === "day" ? "night" : "day"} mode`);
-    document.querySelector('meta[name="theme-color"]').content = m.theme;
-    if (animateName) scramble($("name"), m.name);
-    else $("name").textContent = m.name;
-  }
+  <p class="contacts" id="contacts">
+    <a href="https://t.me/sourcingdenis" target="_blank" rel="noopener">telegram</a>
+    <a href="https://linkedin.com/in/sourcingdenis" target="_blank" rel="noopener">linkedin</a>
+    <a href="https://soundcloud.com/diskevich" target="_blank" rel="noopener">soundcloud</a>
+  </p>
 
-  function initialMode() {
-    try {
-      const saved = localStorage.getItem("mode");
-      if (saved === "day" || saved === "night") return saved;
-    } catch (e) {}
-    const h = new Date().getHours();
-    return h >= 20 || h < 7 ? "night" : "day";
-  }
+  <nav class="section-index" aria-label="Page sections">
+    <a href="#playbooks">Playbooks</a>
+    <a href="#ai-in-hiring">AI in hiring</a>
+    <a href="#mixes">Mixes</a>
+    <a href="#contacts">Contacts</a>
+  </nav>
 
-  render(initialMode(), false);
+  <section id="playbooks">
+    <h2><a href="#playbooks">Sourcing playbooks</a></h2>
 
-  // Fit the headline to the screen: sized by the longest alias so the name
-  // keeps one size across shifts, and capped by height for landscape phones.
-  const h1 = document.querySelector("h1");
-  const probe = h1.cloneNode(true);
-  probe.removeAttribute("id");
-  probe.querySelector("#name").removeAttribute("id");
-  probe.setAttribute("aria-hidden", "true");
-  Object.assign(probe.style, { position: "absolute", visibility: "hidden", left: "-9999px", fontSize: "100px", animation: "none" });
-  document.body.appendChild(probe);
-  const longest = Object.values(MODES).map((m) => m.name).sort((a, b) => b.length - a.length)[0];
-  function fitName() {
-    probe.firstChild.textContent = longest;
-    const avail = h1.parentElement.clientWidth;
-    const byWidth = (avail / probe.scrollWidth) * 100 * 0.97;
-    const byHeight = innerHeight * (innerWidth > innerHeight && innerHeight < 500 ? 0.24 : 0.3);
-    root.style.setProperty("--name-size", Math.min(byWidth, byHeight, 190).toFixed(1) + "px");
-  }
-  fitName();
-  addEventListener("resize", fitName);
-  if (document.fonts) document.fonts.ready.then(fitName);
+    <p class="entry">🔎 <button class="t" type="button" data-fold aria-expanded="false" aria-controls="f-boolean">Boolean query builder</button> — Turning a job description into LinkedIn and X-ray search strings</p>
+    <div class="fold" id="f-boolean" hidden>
+      <p>Start from the must-haves, not the title. I group synonyms into OR-blocks (titles, core stack, domain), join the blocks with AND, and cut the noise with NOT (recruiters, students, agencies). The same logic then becomes an X-ray string: <code>site:linkedin.com/in</code> plus quoted phrases.</p>
+      <p>Test each block on its own first. If one block returns nothing, the whole query will too.</p>
+    </div>
 
-  $("toggle").addEventListener("click", (e) => {
-    const b = e.currentTarget.getBoundingClientRect();
-    // keyboard activation has no pointer coords: start the reveal from the toggle itself
-    switchShift(e.clientX || b.left + b.width / 2, e.clientY || b.top + b.height / 2);
-  });
+    <p class="entry">🧭 <button class="t" type="button" data-fold aria-expanded="false" aria-controls="f-angles">Search angles in 60 seconds</button> — Three one-line directions before writing a single query</p>
+    <div class="fold" id="f-angles" hidden>
+      <p>H1, H2, H3: one line each, naming the angle and what makes it different (stack, geography or title). It's a triage step: pick a direction in seconds, then expand only the one that looks promising.</p>
+    </div>
 
-  function switchShift(x, y) {
-    const next = root.dataset.mode === "day" ? "night" : "day";
-    try { localStorage.setItem("mode", next); } catch (err) {}
+    <p class="entry">🧪 <button class="t" type="button" data-fold aria-expanded="false" aria-controls="f-hypotheses">Non-obvious search hypotheses</button> — Where else the right people might be hiding</p>
+    <div class="fold" id="f-hypotheses" hidden>
+      <p>Five logics I rotate through: title substitution (the same job under another name), industry pivot (the same skills in a neighbouring domain), geographic arbitrage, stack-based inference (what else people who use X usually know) and career-transition patterns.</p>
+      <p>Each hypothesis gets its own titles, keywords and donor companies.</p>
+    </div>
 
-    if (!document.startViewTransition || reduced) { render(next, true); return; }
+    <p class="entry">🗺️ <button class="t" type="button" data-fold aria-expanded="false" aria-controls="f-partition">Market partition</button> — Cover the whole market instead of guessing the one best query</p>
+    <div class="fold" id="f-partition" hidden>
+      <p>Split the addressable pool along a few independent axes (company profile, stack specialisation, one or two role-specific axes) so the segments barely overlap and together cover everything.</p>
+      <p>Then track net-new profiles per segment and stop when a segment stops producing them.</p>
+    </div>
 
-    const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-    const t = document.startViewTransition(() => render(next, true));
-    t.ready.then(() => {
-      root.animate(
-        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${r}px at ${x}px ${y}px)`] },
-        { duration: 700, easing: "cubic-bezier(.7,0,.2,1)", pseudoElement: "::view-transition-new(root)" }
-      );
-    });
-  }
+    <p class="entry">✉️ <button class="t" type="button" data-fold aria-expanded="false" aria-controls="f-outreach">Outreach that gets replies</button> — Short, self-aware first messages for passive candidates</p>
+    <div class="fold" id="f-outreach" hidden>
+      <p>Personalisation comes from the profile, the hook comes from the role itself, and a little humour covers the fact that yes, this is another recruiter message. I write five variants per candidate and send the one that sounds most human.</p>
+    </div>
 
-  // Swipe sideways anywhere to change shift (mobile)
-  let sx = 0, sy = 0;
-  addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
-  addEventListener("touchend", (e) => {
-    const t = e.changedTouches[0];
-    const dx = t.clientX - sx, dy = t.clientY - sy;
-    if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 2) switchShift(t.clientX, t.clientY);
-  }, { passive: true });
+    <p class="entry">📝 <button class="t" type="button" data-fold aria-expanded="false" aria-controls="f-jd">Job posts without corporate fluff</button> — Internal role cards turned into honest public job posts</p>
+    <div class="fold" id="f-jd" hidden>
+      <p>Lead with the actual challenge, be straight about what's hard, cut the buzzwords and leave out anything confidential. A good post filters as much as it attracts.</p>
+    </div>
+  </section>
 
-  // Kyiv clock with a status line
-  const fmt = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Kyiv", hour: "2-digit", minute: "2-digit", hour12: false });
-  function tick() {
-    const time = fmt.format(new Date());
-    const h = parseInt(time, 10);
-    let status = "probably asleep";
-    if (h >= 9 && h < 19) status = "probably sourcing";
-    else if (h >= 19 || h < 3) status = "probably mixing";
-    $("clock").textContent = `Kyiv, ${time} — ${status}`;
-  }
-  tick();
-  setInterval(tick, 15000);
-})();
-</script>
+  <section id="ai-in-hiring">
+    <h2><a href="#ai-in-hiring">Dashboards &amp; AI in hiring</a></h2>
+
+    <p class="entry">📊 <button class="t" type="button" data-fold aria-expanded="false" aria-controls="f-sourcer-dash">Sourcer activity &amp; funnel dashboards</button> — Outreach volume, reply rates and funnel conversion per person</p>
+    <div class="fold" id="f-sourcer-dash" hidden>
+      <p>ATS exports go in and a single interactive HTML dashboard comes out: who reached out to whom, which messages got replies, and how candidates moved through each stage. It turns the weekly "how are we doing?" into a five-minute read.</p>
+    </div>
+
+    <p class="entry">🧑‍💼 <button class="t" type="button" data-fold aria-expanded="false" aria-controls="f-recruiter-dash">Recruiter load &amp; conversion</button> — Interview velocity, workload and stage conversion per recruiter</p>
+    <div class="fold" id="f-recruiter-dash" hidden>
+      <p>This shows who is overloaded before it turns into missed candidates, and where in the process people drop out and why.</p>
+    </div>
+
+    <p class="entry">🤖 <button class="t" type="button" data-fold aria-expanded="false" aria-controls="f-copilot">AI copilot search briefs</button> — One precise brief an AI sourcing agent can actually run</p>
+    <div class="fold" id="f-copilot" hidden>
+      <p>The brief names the one axis that really separates strong candidates from the rest, flags where the agent is likely to misread the role, and limits the agent to search only. Before anything runs at scale, it asks for a sanity check on every axis.</p>
+    </div>
+
+    <p class="entry">🧮 <button class="t" type="button" data-fold aria-expanded="false" aria-controls="f-bonus">Sourcer bonus model</button> — A transparent calculator that ties bonuses to results</p>
+    <div class="fold" id="f-bonus" hidden>
+      <p>Everyone can see exactly how their numbers turn into money. Quality of pipeline counts, not just volume.</p>
+    </div>
+
+    <p class="entry">📈 <button class="t" type="button" data-fold aria-expanded="false" aria-controls="f-weekly">Weekly pipeline review</button> — Week-over-week trends per vacancy, turned into a short readout</p>
+    <div class="fold" id="f-weekly" hidden>
+      <p>What moved, what stalled and what to change next week, with one short paragraph per role.</p>
+    </div>
+  </section>
+
+  <section id="mixes">
+    <h2><a href="#mixes">DJ mixes</a></h2>
+
+    <p class="entry">🎧 <a class="t" href="https://soundcloud.com/diskevich" target="_blank" rel="noopener">diskevich on SoundCloud</a> — Sets and mixes from the night shift</p>
+
+    <div class="sc-facade" id="sc-facade">
+      <button type="button" class="sc-load" id="sc-load"><span aria-hidden="true">▶</span> Load player</button>
+      <p class="mono sc-note">Loads SoundCloud's player (third-party) right here.</p>
+    </div>
+  </section>
+
+  <p class="ask">Want to talk sourcing, or book a set? <a href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Message me on Telegram →</a></p>
+</main>
+
+<footer class="site-footer">
+  <p class="mono" id="clock">Kyiv</p>
+  <div class="divider" aria-hidden="true">— · —</div>
+  <a href="#top" class="signature" aria-label="Back to top">sourcingdenis <span>/</span> diskevich</a>
+  <p class="mono small">Last updated: September 2026</p>
+</footer>
+
+<script src="main.js" defer></script>
 </body>
 </html>
