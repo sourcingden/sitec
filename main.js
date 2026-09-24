@@ -200,10 +200,10 @@
   $("sc-load").addEventListener("click", () => {
     const box = $("sc-facade");
     const iframe = document.createElement("iframe");
-    iframe.title = "diskevich on SoundCloud";
+    iframe.title = "mixes spotlight by diskevich on SoundCloud";
     iframe.allow = "autoplay";
     iframe.loading = "lazy";
-    iframe.src = "https://w.soundcloud.com/player/?url=" + encodeURIComponent("https://soundcloud.com/diskevich") +
+    iframe.src = "https://w.soundcloud.com/player/?url=" + encodeURIComponent("https://soundcloud.com/diskevich/sets/mixes-highlight") +
       "&color=%23ff6a2b&auto_play=false&hide_related=true&show_comments=false&show_user=true&visual=false";
     box.replaceChildren(iframe);
     box.classList.add("loaded");
