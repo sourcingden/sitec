@@ -56,32 +56,11 @@
 
 <main class="page">
   <div class="hero">
-    <div class="record" id="record" role="button" tabindex="0" aria-label="Vinyl record. Drag to scratch, tap to change the label.">
-      <svg viewBox="-125 -125 250 250" aria-hidden="true">
-        <defs>
-          <radialGradient id="vinyl" r="0.5">
-            <stop offset="0.3" stop-color="#1c1c1c"/>
-            <stop offset="1" stop-color="#0a0a0a"/>
-          </radialGradient>
-          <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0.25" stop-color="#fff" stop-opacity="0"/>
-            <stop offset="0.45" stop-color="#fff" stop-opacity="0.12"/>
-            <stop offset="0.5" stop-color="#fff" stop-opacity="0"/>
-            <stop offset="0.75" stop-color="#fff" stop-opacity="0.07"/>
-            <stop offset="0.8" stop-color="#fff" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <g id="disc">
-          <circle r="124" fill="url(#vinyl)"/>
-          <g id="grooves" fill="none" stroke="#fff" stroke-opacity="0.07"></g>
-          <circle r="124" fill="none" stroke="#000" stroke-width="2"/>
-          <g id="label"></g>
-        </g>
-        <circle r="124" fill="url(#sheen)" pointer-events="none"/>
-        <circle class="hole" r="2.6"/>
-      </svg>
-    </div>
-    <p class="record-caption mono" id="record-caption">33⅓ rpm · drag to scratch · tap to flip</p>
+    <canvas class="engraving" id="engraving" data-src="assets/flammarion.webp" tabindex="0" role="img"
+      aria-label="Flammarion engraving, 1888: a traveller kneels at the edge of the world and pushes his head through the sky to see the stars and wheels beyond. Move over it to scatter the dots, tap to rebuild."></canvas>
+    <img class="engraving-fallback" src="assets/flammarion.webp" width="700" height="564"
+      alt="Flammarion engraving, 1888: a traveller pushes his head through the edge of the sky to see what lies beyond.">
+    <p class="engraving-caption mono" id="engraving-caption"><span>Flammarion engraving, 1888</span> · <span>move to scatter</span> · <span>tap to rebuild</span></p>
   </div>
 
   <h1>Den — sourcing by day, DJ by night</h1>
@@ -184,9 +163,11 @@
   <p class="mono" id="clock">Kyiv</p>
   <div class="divider" aria-hidden="true">— · —</div>
   <a href="#top" class="signature" aria-label="Back to top">sourcingdenis <span>/</span> diskevich</a>
+  <p class="mono small">Engraving: Flammarion, <em>L'atmosphère</em> (1888), artist unknown, public domain</p>
   <p class="mono small">Last updated: September 2026</p>
 </footer>
 
 <script src="main.js" defer></script>
+<script src="engraving.js" defer></script>
 </body>
 </html>
