@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" data-side="day" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Case studies — Denys Dinkevych</title>
+<meta name="description" content="How I build sourcing infrastructure: a funnel you can defend, bonuses tied to output, and an ATS migration from Recruitee to Ashby. With interactive demo dashboards.">
+<meta name="author" content="Denys Dinkevych">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Case studies — Denys Dinkevych">
+<meta property="og:description" content="How I build sourcing infrastructure: a funnel you can defend, bonuses tied to output, and an ATS migration from Recruitee to Ashby. With interactive demo dashboards.">
+<meta property="og:url" content="https://sourcingden.github.io/sitec/cases/">
+<meta property="og:image" content="https://sourcingden.github.io/sitec/cases/og-cases.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sourcingden.github.io/sitec/cases/og-cases.png">
+<link rel="canonical" href="https://sourcingden.github.io/sitec/cases/">
+<meta name="theme-color" content="#f4f1e9">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="preload" href="../assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body id="top" class="sub">
+<div class="stars" aria-hidden="true"><div class="stars-layer"></div><div class="stars-layer"></div><div class="stars-layer"></div></div>
+
+<header class="bar">
+  <div class="wrap bar-inner">
+    <a class="me" href="../?side=day">
+      <img src="../assets/avatar.webp" width="32" height="32" alt="">
+      <span>Denys Dinkevych</span>
+    </a>
+    <nav class="subnav" aria-label="Site">
+      <a href="../tools/">Tools</a>
+      <a href="../cases/" aria-current="page">Cases</a>
+      <a href="../?side=night">DJ</a>
+    </nav>
+    <a class="btn btn-primary bar-cta" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Message on Telegram</a>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+  <section class="page-head">
+    <p class="eyebrow mono">Case studies</p>
+    <h1>Sourcing infrastructure, shown not told</h1>
+    <p class="lede">Three pieces of work, each as problem → what I did → result. The dashboards are interactive but run on invented numbers: real hiring data stays where it belongs.</p>
+  </section>
+
+  <article class="case" id="funnel-case">
+    <div class="case-head">
+      <p class="eyebrow mono">Case 01 · Metrics</p>
+      <h2>A funnel you can defend</h2>
+    </div>
+    <dl class="pdr">
+      <div><dt class="mono">Problem</dt><dd>Screens were counted differently by different people, so conversion numbers couldn't be compared — or trusted.</dd></div>
+      <div><dt class="mono">What I did</dt><dd>Rebuilt how screens and submissions are counted, then put per-sourcer conversion on live dashboards built on ATS data.</dd></div>
+      <div><dt class="mono">Result</dt><dd>One funnel everyone reads the same way, and real-time pipeline visibility for leadership — sourcing decisions you can defend.</dd></div>
+    </dl>
+    <div class="viz">
+      <div class="viz-head">
+        <h3>Sourcing funnel <span class="demo mono">Demo data</span></h3>
+        <div class="seg-filter" id="funnel-filter" role="group" aria-label="Whose funnel"></div>
+      </div>
+      <div class="viz-body two">
+        <div>
+          <div class="stat"><b class="mono" id="funnel-headline"></b><span id="funnel-headline-note"></span></div>
+          <div class="hbars" id="funnel"></div>
+        </div>
+        <div>
+          <label class="viz-label">Conversion by sourcer
+            <select id="compare-step" class="viz-select"></select>
+          </label>
+          <div class="hbars compare" id="compare"></div>
+          <p class="viz-foot mono" id="compare-avg"></p>
+        </div>
+      </div>
+      <details class="viz-table"><summary>Show the numbers as a table</summary><div class="table-wrap"><table id="funnel-table"></table></div></details>
+    </div>
+  </article>
+
+  <article class="case" id="bonus-case">
+    <div class="case-head">
+      <p class="eyebrow mono">Case 02 · Incentives</p>
+      <h2>Bonuses tied to output</h2>
+    </div>
+    <dl class="pdr">
+      <div><dt class="mono">Problem</dt><dd>Bonuses that reward activity push sourcers toward volume, not toward candidates who move forward.</dd></div>
+      <div><dt class="mono">What I did</dt><dd>Designed a performance-based model weighted by screens, submissions and hires, with conversion tiers — and formalised it into policy.</dd></div>
+      <div><dt class="mono">Result</dt><dd>Sourcer incentives tied directly to pipeline outcomes, written down as policy.</dd></div>
+    </dl>
+    <div class="viz">
+      <div class="viz-head"><h3>Bonus calculator <span class="demo mono">Demo data</span></h3><p class="viz-sub">Weights here are illustrative, not the real policy.</p></div>
+      <div class="viz-body two">
+        <form class="sliders" id="bonus-form">
+          <label>Screens <output id="out-screens" class="mono"></output><input type="range" name="screens" min="0" max="40" value="20"></label>
+          <label>Submissions <output id="out-submissions" class="mono"></output><input type="range" name="submissions" min="0" max="20" value="8"></label>
+          <label>Hires <output id="out-hires" class="mono"></output><input type="range" name="hires" min="0" max="6" value="2"></label>
+        </form>
+        <div>
+          <div class="stat"><b class="mono" id="bonus-total"></b><span><span id="bonus-tier" class="chip-label"></span> <span id="bonus-why"></span></span></div>
+          <div class="stack" id="bonus-bar" aria-label="Bonus breakdown"></div>
+          <ul class="legend" id="bonus-legend"></ul>
+        </div>
+      </div>
+      <details class="viz-table"><summary>Show the breakdown as a table</summary><div class="table-wrap"><table id="bonus-table"></table></div></details>
+    </div>
+  </article>
+
+  <article class="case" id="migration-case">
+    <div class="case-head">
+      <p class="eyebrow mono">Case 03 · Systems</p>
+      <h2>From Recruitee to Ashby</h2>
+    </div>
+    <dl class="pdr">
+      <div><dt class="mono">Problem</dt><dd>A legacy ATS, years of candidate history, and a TA team that had to keep hiring during the switch.</dd></div>
+      <div><dt class="mono">What I did</dt><dd>Led the migration end to end — data mapping, transfer, documentation and training.</dd></div>
+      <div><dt class="mono">Result</dt><dd>Candidate database and notes carried over, a team wiki for Ashby best practices, and a TA team onboarded through six workshops.</dd></div>
+    </dl>
+    <ol class="steps">
+      <li><span class="mono">01</span><h3>Map</h3><p>Mapped the candidate database, fields and pipeline stages from Recruitee to Ashby.</p></li>
+      <li><span class="mono">02</span><h3>Move</h3><p>Transferred candidates with their notes and history intact.</p></li>
+      <li><span class="mono">03</span><h3>Document</h3><p>Built a wiki of Ashby best practices together with the Talent Acquisition Partners.</p></li>
+      <li><span class="mono">04</span><h3>Teach</h3><p>Ran six interactive workshops to onboard the whole TA team onto the new system.</p></li>
+      <li><span class="mono">05</span><h3>Automate</h3><p>Automated recurring reporting on top of the new ATS.</p></li>
+    </ol>
+  </article>
+
+  <section class="block contact">
+    <h2>Building something like this?</h2>
+    <div class="actions">
+      <a class="btn btn-primary btn-big" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Telegram · sourcingdenis.t.me</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/sourcingdenis" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </section>
+  <div class="viz-tip" id="viz-tip" role="tooltip" hidden></div>
+
+</main>
+
+<footer class="foot wrap">
+  <p class="mono" id="clock">Kyiv</p>
+  <p class="mono small"><a href="../?side=day">← Denys Dinkevych</a> · Last updated September 2026</p>
+</footer>
+
+<script src="../site.js" defer></script>
+<script src="cases.js" defer></script>
+</body>
+</html>
