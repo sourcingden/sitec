@@ -1,16 +1,19 @@
-# sourcingdenis / diskevich
+# Denys Dinkevych — sourcing by day, DJ by night
 
-Personal hub: sourcing by day, DJ by night.
+Personal site with two sides that share one template:
 
-- **Dithered engraving hero** (`engraving.js`): the Flammarion engraving (1888, public domain) broken into ~28k dots with Atkinson dithering. Dots run from the cursor or finger, a tap scatters them and they rebuild; in dark mode they pulse at 124 bpm. The image is `assets/flammarion.webp`.
-- **Sections**: Sourcing playbooks, Dashboards & AI in hiring, DJ mixes. Entries expand in place.
-- **SoundCloud player** loads only when a visitor clicks "Load player", so no third-party content loads until then.
-- Light/dark theme follows the system and can be switched with the corner toggle. Dark mode has parallax stars.
+- **Sourcing** (`?side=day`, light): headline, proof numbers, a working **Boolean builder** (LinkedIn + Google X-ray strings, runs in the browser), methods, track record, writing.
+- **DJ** (`?side=night`, dark): diskevich mix credits, the *mixes spotlight* SoundCloud playlist (loads only on click), booking.
 
-Static site, no build: `index.html`, `styles.css`, `main.js`, `engraving.js`, `assets/`, `og.png`.
+Link LinkedIn to `https://sourcingden.github.io/sitec/?side=day` and SoundCloud to `https://sourcingden.github.io/sitec/?side=night`. Without the parameter the site opens the visitor's last side, or day.
 
-To swap the picture, replace `assets/flammarion.webp` (keep it high-contrast; update the `aspect-ratio` in `styles.css` and the `width`/`height` on the fallback `<img>` if the proportions change).
+The hero art (`engraving.js`) is ~30k dots dithered from two images: the portrait by day and the Flammarion engraving (1888, public domain) by night. Switching sides flies the dots from one picture into the other; they also run from the cursor, scatter on tap, and pulse at 124 bpm at night.
 
-Live at **https://sourcingden.github.io/sitec/**, served by GitHub Pages.
+## Files
+- `index.html`: content. Side-specific parts carry `data-only="day"` or `data-only="night"`.
+- `styles.css`, `main.js` (side switching, clock, player), `boolean.js` (builder; pure functions testable in Node), `engraving.js` (dots).
+- `assets/portrait.webp`, `assets/flammarion.webp` (dot sources), `assets/avatar.webp`, `og.png`.
 
-To add an entry, copy an existing `<p class="entry">…</p>` (plus its `<div class="fold">` if it expands) in `index.html`.
+## Editing
+- Numbers, jobs and text: edit `index.html`.
+- New dot picture: replace the file in `assets/` (700×564, high contrast) and tune `mid`/`spread` in the canvas `data-images` attribute (lower `spread` = harsher contrast).
