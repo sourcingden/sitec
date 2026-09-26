@@ -34,10 +34,23 @@
         `<li><a href="${esc(m.url)}" ${ext}><span>${esc(m.label)}</span><em>${esc(m.title)}</em><small class="mono">${fmtK(m.plays)} plays</small></a></li>`);
       fill("press-coverage", p.press, (a) =>
         `<li><a href="${esc(a.url)}" ${ext}><span>${esc(a.title)}</span><em>${esc(a.outlet)} · ${esc(a.date.slice(0, 4))}</em></a></li>`);
-      fill("press-gigs", p.gigs, (g) => `<li>${esc(typeof g === "string" ? g : [g.date, g.venue, g.city].filter(Boolean).join(" · "))}</li>`);
+      // gigs: newest first; "Upcoming" is decided in the browser, so it drops off by itself after the date
+      const today = new Date().toLocaleDateString("sv"); // YYYY-MM-DD, local time
+      const day = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+      const gigs = [...(p.gigs || [])].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+      for (const id of ["press-gigs", "home-gigs"]) fill(id, gigs, (g) => {
+        if (typeof g === "string") return `<li><span>${esc(g)}</span></li>`;
+        const soon = g.date >= today ? ' <b class="soon mono">Upcoming</b>' : "";
+        const when = g.date ? day.format(new Date(g.date + "T00:00:00Z")) : "";
+        const inner = `<span>${esc(g.title)}${soon}</span><em>${esc([g.venue, g.city].filter(Boolean).join(" · "))}</em><small class="mono">${esc(when)}</small>`;
+        return g.url ? `<li><a href="${esc(g.url)}" ${ext}>${inner}</a></li>` : `<li><div class="row">${inner}</div></li>`;
+      });
       fill("press-rider", p.rider, (r) => `<li>${esc(r)}</li>`);
-      const yt = document.getElementById("press-youtube");
-      if (yt && p.links && p.links.youtube) yt.href = p.links.youtube;
+      // external profile links: <a data-press-link="ra"> gets its href from links.ra
+      for (const a of document.querySelectorAll("[data-press-link]")) {
+        const url = (p.links || {})[a.dataset.pressLink];
+        if (url) a.href = url; else a.hidden = true;
+      }
       document.documentElement.classList.add("press-ready");
     })
     .catch((err) => console.warn("press.json could not be loaded; keeping the static content", err));

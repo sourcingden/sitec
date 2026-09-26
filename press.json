@@ -1,5 +1,5 @@
 {
-  "_readme": "DJ facts for the night side and /press/. Edit freely: empty strings and empty lists hide their block on the site.",
+  "_readme": "DJ facts for the night side and /press/. Edit freely: empty strings and empty lists hide their block on the site. Gigs come from Resident Advisor (see README for the query to refresh them).",
   "name": "diskevich",
   "realName": "Denys Dinkevych",
   "city": "Kyiv, Ukraine",
@@ -11,29 +11,171 @@
   "genres": [],
   "bpm": "",
   "quotes": [
-    { "text": "When it comes to unearthing some of the most obscure dancefloor heaters in the world, diskevich is one of the hardest-working DJs in music right now.", "source": "Truants", "url": "https://truantsblog.com/2023/truancy-volume-320-diskevich/" },
-    { "text": "One of the best Ukrainian selectors.", "source": "Nugs On Board", "url": "https://soundcloud.com/nugsonboardlabel/nugcast-19-diskevich" },
-    { "text": "The digging and collecting wizard.", "source": "Breathe Records", "url": "https://soundcloud.com/breathe_records/breathecast-022-diskevich" },
-    { "text": "An hour of carefully selected tunes from his collection hitting the spot bullseye any time of the day!", "source": "LOWMONEYMUSICLOVE", "url": "https://soundcloud.com/lowmoneymusiclove/lowmoneymusicmix-37-diskevich" }
+    {
+      "text": "When it comes to unearthing some of the most obscure dancefloor heaters in the world, diskevich is one of the hardest-working DJs in music right now.",
+      "source": "Truants",
+      "url": "https://truantsblog.com/2023/truancy-volume-320-diskevich/"
+    },
+    {
+      "text": "One of the best Ukrainian selectors.",
+      "source": "Nugs On Board",
+      "url": "https://soundcloud.com/nugsonboardlabel/nugcast-19-diskevich"
+    },
+    {
+      "text": "The digging and collecting wizard.",
+      "source": "Breathe Records",
+      "url": "https://soundcloud.com/breathe_records/breathecast-022-diskevich"
+    },
+    {
+      "text": "An hour of carefully selected tunes from his collection hitting the spot bullseye any time of the day!",
+      "source": "LOWMONEYMUSICLOVE",
+      "url": "https://soundcloud.com/lowmoneymusiclove/lowmoneymusicmix-37-diskevich"
+    }
   ],
   "press": [
-    { "title": "Truancy Volume 320: diskevich — interview and mix", "outlet": "Truants", "date": "2023-12-13", "url": "https://truantsblog.com/2023/truancy-volume-320-diskevich/" }
+    {
+      "title": "Truancy Volume 320: diskevich — interview and mix",
+      "outlet": "Truants",
+      "date": "2023-12-13",
+      "url": "https://truantsblog.com/2023/truancy-volume-320-diskevich/"
+    }
   ],
   "mixes": [
-    { "label": "Nugs On Board", "title": "Nugcast #19", "date": "2022-07-06", "plays": 26710, "url": "https://soundcloud.com/nugsonboardlabel/nugcast-19-diskevich" },
-    { "label": "tresydos", "title": "018", "date": "2023-08-02", "plays": 5441, "url": "https://soundcloud.com/tresydosrecords/018-diskevich" },
-    { "label": "LOWMONEYMUSICLOVE", "title": "LOWMONEYMUSICMIX 37", "date": "2024-05-31", "plays": 5067, "url": "https://soundcloud.com/lowmoneymusiclove/lowmoneymusicmix-37-diskevich" },
-    { "label": "X-Kalay", "title": "XKM007", "date": "2023-09-07", "plays": 4096, "url": "https://soundcloud.com/x-kalay/xkm007-diskevich" },
-    { "label": "Truants", "title": "Truancy Volume 320", "date": "2023-12-13", "plays": 3734, "url": "https://soundcloud.com/truants/truancy-volume-320-diskevich" },
-    { "label": "Kalahari Oyster Cult", "title": "The Sizeable Mix Vol. 23", "date": "2024-03-05", "plays": 3389, "url": "https://soundcloud.com/kalaharioystercult/the-sizeable-mix-vol-23-diskevich" },
-    { "label": "Breathe Records", "title": "Breathecast 022", "date": "2023-10-18", "plays": 3340, "url": "https://soundcloud.com/breathe_records/breathecast-022-diskevich" }
+    {
+      "label": "Nugs On Board",
+      "title": "Nugcast #19",
+      "date": "2022-07-06",
+      "plays": 26710,
+      "url": "https://soundcloud.com/nugsonboardlabel/nugcast-19-diskevich"
+    },
+    {
+      "label": "tresydos",
+      "title": "018",
+      "date": "2023-08-02",
+      "plays": 5441,
+      "url": "https://soundcloud.com/tresydosrecords/018-diskevich"
+    },
+    {
+      "label": "LOWMONEYMUSICLOVE",
+      "title": "LOWMONEYMUSICMIX 37",
+      "date": "2024-05-31",
+      "plays": 5067,
+      "url": "https://soundcloud.com/lowmoneymusiclove/lowmoneymusicmix-37-diskevich"
+    },
+    {
+      "label": "X-Kalay",
+      "title": "XKM007",
+      "date": "2023-09-07",
+      "plays": 4096,
+      "url": "https://soundcloud.com/x-kalay/xkm007-diskevich"
+    },
+    {
+      "label": "Truants",
+      "title": "Truancy Volume 320",
+      "date": "2023-12-13",
+      "plays": 3734,
+      "url": "https://soundcloud.com/truants/truancy-volume-320-diskevich"
+    },
+    {
+      "label": "Kalahari Oyster Cult",
+      "title": "The Sizeable Mix Vol. 23",
+      "date": "2024-03-05",
+      "plays": 3389,
+      "url": "https://soundcloud.com/kalaharioystercult/the-sizeable-mix-vol-23-diskevich"
+    },
+    {
+      "label": "Breathe Records",
+      "title": "Breathecast 022",
+      "date": "2023-10-18",
+      "plays": 3340,
+      "url": "https://soundcloud.com/breathe_records/breathecast-022-diskevich"
+    }
   ],
-  "gigs": [],
+  "gigs": [
+    {
+      "date": "2026-10-03",
+      "title": "ÓПІК",
+      "venue": "Closer",
+      "city": "Kyiv",
+      "url": "https://ra.co/events/2502467"
+    },
+    {
+      "date": "2026-09-13",
+      "title": "Rancho BBQ x TOP4UH",
+      "venue": "BRUKXT",
+      "city": "Kyiv",
+      "url": "https://ra.co/events/2535892"
+    },
+    {
+      "date": "2024-07-12",
+      "title": "Alex Savage b2b diskevich",
+      "venue": "Abo Records",
+      "city": "Kyiv",
+      "url": "https://ra.co/events/1966349"
+    },
+    {
+      "date": "2024-07-06",
+      "title": "∄ Community Event",
+      "venue": "∄",
+      "city": "Kyiv",
+      "url": "https://ra.co/events/1960574"
+    },
+    {
+      "date": "2024-03-23",
+      "title": "Masnytsya Epilogue",
+      "venue": "Closer",
+      "city": "Kyiv",
+      "url": "https://ra.co/events/1888841"
+    }
+  ],
   "rider": [],
   "links": {
     "soundcloud": "https://soundcloud.com/diskevich",
     "playlist": "https://soundcloud.com/diskevich/sets/mixes-highlight",
     "youtube": "",
-    "telegram": "https://t.me/sourcingdenis"
-  }
+    "telegram": "https://t.me/sourcingdenis",
+    "ra": "https://ra.co/dj/diskevich"
+  },
+  "photos": [
+    {
+      "file": "diskevich-01.jpg",
+      "web": "diskevich-01-web.webp",
+      "w": 1280,
+      "h": 854,
+      "caption": "Smiling in sunglasses, studio flash",
+      "alt": "diskevich smiling in dark sunglasses in a photo studio, bright flash behind"
+    },
+    {
+      "file": "diskevich-02.jpg",
+      "web": "diskevich-02-web.webp",
+      "w": 1280,
+      "h": 847,
+      "caption": "Sunglasses, pink light",
+      "alt": "diskevich in sunglasses against a wall lit in soft pink and blue"
+    },
+    {
+      "file": "diskevich-03.jpg",
+      "web": "diskevich-03-web.webp",
+      "w": 847,
+      "h": 1280,
+      "caption": "Full length, portrait",
+      "alt": "Full-length portrait of diskevich in sunglasses and an 'I'm exploring' T-shirt"
+    },
+    {
+      "file": "diskevich-04.jpg",
+      "web": "diskevich-04-web.webp",
+      "w": 1280,
+      "h": 854,
+      "caption": "Red light, sticker door",
+      "alt": "diskevich in red light next to a door covered in stickers"
+    },
+    {
+      "file": "diskevich-05.jpg",
+      "web": "diskevich-05-web.webp",
+      "w": 1280,
+      "h": 854,
+      "caption": "Black and white, at the mic",
+      "alt": "Black-and-white portrait of diskevich talking at a microphone"
+    }
+  ]
 }

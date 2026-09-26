@@ -21,6 +21,12 @@ Live: **https://sourcingden.github.io/sitec/** (GitHub Pages, static, no build s
   "links": { "youtube": "https://youtube.com/@..." }
   ```
   After editing the bio, rebuild the zip so it matches (see `assets/press/`).
+- **Gigs** come from Resident Advisor (https://ra.co/dj/diskevich). To refresh them, ask RA's public GraphQL API and copy up to five into `press.json` → `gigs` (newest first; the "Upcoming" tag is computed in the browser from the date):
+  ```sh
+  curl -s https://ra.co/graphql -H 'content-type: application/json' \
+    --data '{"query":"{ artist(slug:\"diskevich\"){ upcoming: events(type: LATEST, limit: 5){ date title contentUrl venue{ name area{ name } } } past: events(type: PREVIOUS, limit: 5){ date title contentUrl venue{ name area{ name } } } } }"}'
+  ```
+- **Press photos** live in `assets/press/photos/` (full JPG + `-web.webp` preview) and are listed in `press.json` → `photos`.
 - **Hero dots:** `engraving.js` dithers `assets/portrait.webp` (day) and `assets/flammarion.webp` (night); tune `mid`/`spread` in the canvas `data-images` attribute.
 
 ## Code

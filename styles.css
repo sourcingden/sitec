@@ -423,6 +423,8 @@ a { color: inherit; }
 .steps p { font-size: 14px; color: var(--muted); }
 
 /* ---------- press / quotes ---------- */
+.sub-h { font-size: 18px; margin: 8px 0 10px; display: flex; align-items: baseline; gap: 10px; }
+.sub-h .mono { font-size: 12px; font-weight: 400; color: var(--muted); }
 .quotes { list-style: none; margin: 0 0 24px; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
 .quotes li { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); padding: 20px; display: flex; flex-direction: column; gap: 12px; }
 .quotes blockquote { margin: 0; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.4; letter-spacing: -0.01em; }
@@ -443,6 +445,18 @@ a { color: inherit; }
 .facts dd { margin: 4px 0 0; font-size: 18px; font-weight: 500; }
 .bullets { margin: 0; padding-left: 20px; }
 .bullets li { padding: 4px 0; }
+
+/* ---------- gigs & photo gallery ---------- */
+.gigs .soon { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; vertical-align: 2px; background: var(--accent); color: var(--on-accent); }
+.gigs .row { display: grid; grid-template-columns: 40px 1fr auto auto; align-items: center; gap: 12px; min-height: 56px; }
+.gigs small { min-width: 96px; }
+.more { margin-top: 14px; }
+.gallery { display: grid; grid-template-columns: 1fr 1fr 0.9fr; gap: 14px; grid-auto-flow: dense; }
+.gallery figure { margin: 0; display: flex; flex-direction: column; min-width: 0; }
+.gallery .tall { grid-column: 3; grid-row: span 2; }
+.gallery img { display: block; width: 100%; height: auto; border-radius: 10px; background: var(--panel); }
+.gallery .tall img { flex: 1; min-height: 0; object-fit: cover; }
+.gallery figcaption { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 8px; font-size: 13px; color: var(--muted); }
 
 /* ---------- 404 ---------- */
 .nf { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-top: 40px; padding-bottom: 40px; }
@@ -497,6 +511,9 @@ a { color: inherit; }
   .check { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) {
+  .gallery { grid-template-columns: 1fr 1fr; }
+  .gallery .tall { grid-column: auto; grid-row: span 2; }
+  .gigs small { min-width: 0; }
   .quotes, .press-grid, .photos { grid-template-columns: 1fr; }
   .facts { grid-template-columns: 1fr 1fr; }
   .mixlist a { grid-template-columns: 32px 1fr auto; }
@@ -517,6 +534,14 @@ a { color: inherit; }
   .plain { grid-template-columns: 1fr; }
 }
 @media (max-width: 420px) {
+  /* gigs keep the venue: it moves under the event title */
+  .mixlist.gigs a, .mixlist.gigs .row { grid-template-columns: 32px 1fr auto; row-gap: 2px; padding: 8px 0; }
+  .mixlist.gigs a::before { grid-row: 1 / span 2; }
+  .mixlist.gigs em { display: block; grid-column: 2; grid-row: 2; text-align: left; font-size: 13px; }
+  .mixlist.gigs small { grid-column: 3; grid-row: 1 / span 2; }
+  .gallery { grid-template-columns: 1fr; }
+  .gallery .tall { grid-row: auto; }
+  .gallery .tall img { object-fit: contain; }
   body { font-size: 16px; }
   .me span { font-size: 15px; }
   .switch button { padding: 0 12px; font-size: 14px; }
