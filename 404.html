@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" data-side="day" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- GitHub Pages serves this file at any missing path, so resolve links from the site root -->
+<base href="/sitec/">
+<title>Not found — Denys Dinkevych</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f4f1e9">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="sub">
+<main class="wrap nf">
+  <canvas id="nf" width="600" height="220" role="img" aria-label="404, drawn in dots"></canvas>
+  <h1>This page wandered off.</h1>
+  <p class="lede">Even a good Boolean string comes back empty sometimes. Try one of these instead:</p>
+  <div class="actions">
+    <a class="btn btn-primary" href="./?side=day">Sourcing</a>
+    <a class="btn btn-ghost" href="./?side=night">DJ</a>
+    <a class="btn btn-ghost" href="tools/">Tools</a>
+  </div>
+</main>
+<script>
+// "404" as dots that run from the cursor and spring back
+(() => {
+  const c = document.getElementById("nf"), x = c.getContext("2d");
+  const W = c.width, H = c.height, reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const off = document.createElement("canvas"); off.width = W; off.height = H;
+  const o = off.getContext("2d");
+  o.font = "700 210px 'Space Grotesk', system-ui, sans-serif"; o.textAlign = "center"; o.textBaseline = "middle";
+  const draw = () => {
+    o.clearRect(0, 0, W, H); o.fillText("404", W / 2, H / 2 + 10);
+    const d = o.getImageData(0, 0, W, H).data, pts = [];
+    for (let yy = 0; yy < H; yy += 5) for (let xx = 0; xx < W; xx += 5) if (d[(yy * W + xx) * 4 + 3] > 128) pts.push({ hx: xx, hy: yy, x: xx, y: yy, vx: 0, vy: 0 });
+    return pts;
+  };
+  let pts = [], p = { x: -999, y: -999 }, on = false;
+  const frame = () => {
+    x.clearRect(0, 0, W, H); x.fillStyle = "#1a1a1a";
+    for (const d of pts) {
+      let ax = (d.hx - d.x) * 0.06, ay = (d.hy - d.y) * 0.06;
+      const dx = d.x - p.x, dy = d.y - p.y, r2 = dx * dx + dy * dy;
+      if (r2 < 3600 && r2 > 0.1) { const r = Math.sqrt(r2), f = (1 - r / 60) ** 2 * 6; ax += dx / r * f; ay += dy / r * f; }
+      d.vx = (d.vx + ax) * 0.85; d.vy = (d.vy + ay) * 0.85; d.x += d.vx; d.y += d.vy;
+      x.fillRect(d.x - 1.2, d.y - 1.2, 2.4, 2.4);
+    }
+    if (!reduced) requestAnimationFrame(frame);
+  };
+  const move = (e) => { const r = c.getBoundingClientRect(); p.x = (e.clientX - r.left) * W / r.width; p.y = (e.clientY - r.top) * H / r.height; };
+  c.addEventListener("pointermove", move);
+  c.addEventListener("pointerleave", () => { p.x = p.y = -999; });
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { pts = draw(); frame(); });
+})();
+</script>
+</body>
+</html>

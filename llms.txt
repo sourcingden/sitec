@@ -1,0 +1,21 @@
+# Denys Dinkevych
+
+> Talent Sourcing Lead from Ukraine (12 years in tech hiring) who builds sourcing infrastructure: AI sourcing tools, ATS analytics and metrics. By night he DJs as diskevich, a Kyiv-based selector and record collector.
+
+## Sourcing
+- [Home, sourcing side](https://sourcingden.github.io/sitec/?side=day): headline, track record (iDeals, Spendesk, Playson, Preply), methods, writing.
+- [Case studies](https://sourcingden.github.io/sitec/cases/): funnel metrics, an output-based bonus model, a Recruitee → Ashby migration. Dashboards there use invented demo data.
+
+## Free tools (run in the browser, nothing is sent anywhere)
+- [Boolean & X-ray builder](https://sourcingden.github.io/sitec/tools/boolean/): LinkedIn, Google X-ray, GitHub and Stack Overflow search strings.
+- [Email pattern generator](https://sourcingden.github.io/sitec/tools/email-patterns/): common corporate email formats from a name and a domain; guesses, not verified addresses.
+- [Outreach message checker](https://sourcingden.github.io/sitec/tools/outreach-check/): a score and fixes for a first message to a candidate.
+
+## DJ (diskevich)
+- [Home, DJ side](https://sourcingden.github.io/sitec/?side=night) and [press kit](https://sourcingden.github.io/sitec/press/): bio, quotes, guest mixes for Truancy, Nugs On Board, Breathe Records, X-Kalay, tresydos, LOWMONEYMUSICLOVE and Kalahari Oyster Cult; press photos.
+- Facts as data: [press.json](https://sourcingden.github.io/sitec/press.json)
+
+## Contact
+- Telegram: https://t.me/sourcingdenis
+- LinkedIn: https://linkedin.com/in/sourcingdenis
+- SoundCloud: https://soundcloud.com/diskevich

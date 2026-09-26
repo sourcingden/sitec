@@ -141,6 +141,7 @@
     bar.replaceChildren(...parts.filter((p) => p.amount > 0).map((p) => {
       const seg = document.createElement("span");
       seg.className = "seg";
+      seg.setAttribute("role", "img");
       seg.style.flexGrow = p.amount;
       seg.style.background = p.color;
       seg.setAttribute("aria-label", `${p.label}: $${fmt(p.amount)}`);

@@ -90,7 +90,7 @@
     return { xs, ys };
   }
 
-  function build() {
+  async function build() {
     const w = canvas.clientWidth;
     const ref = images[SIDES[0]];
     if (!w || SIDES.some((s) => !images[s].naturalWidth)) return;
@@ -108,7 +108,11 @@
 
     const cols = Math.floor(cssW / CELL), rows = Math.floor(cssH / CELL);
     const sets = {};
-    for (const s of SIDES) sets[s] = dither(images[s], SOURCES[s], cols, rows);
+    for (const s of SIDES) {
+      sets[s] = dither(images[s], SOURCES[s], cols, rows);
+      await new Promise((r) => setTimeout(r)); // yield between images: shorter main-thread tasks
+    }
+    if (canvas.clientWidth !== w) return; // resized while we were yielding; the resize rebuild wins
     n = Math.max(...SIDES.map((s) => sets[s].xs.length));
 
     // Pair dots in raster order, so the morph flows top-to-bottom instead of
@@ -263,11 +267,12 @@
   new ResizeObserver(() => {
     clearTimeout(t);
     t = setTimeout(() => {
-      if (canvas.clientWidth !== lastW) { lastW = canvas.clientWidth; build(); wake(); }
+      if (canvas.clientWidth !== lastW) { lastW = canvas.clientWidth; build().then(wake); }
     }, 120);
   }).observe(hero);
 
   Promise.all(SIDES.map((s) => images[s].decode()))
-    .then(() => { lastW = canvas.clientWidth; build(); wake(); })
+    .then(() => { lastW = canvas.clientWidth; return build(); })
+    .then(wake)
     .catch((err) => console.warn("dots: falling back to the static image", err));
 })();

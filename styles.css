@@ -10,7 +10,7 @@
   --muted: #6a655b;
   --line: #ddd7c9;
   --panel: #ebe6da;
-  --accent: #1f5eff;
+  --accent: #1a52e0; /* 5.1:1 on the panel, 5.6:1 on the page */
   --on-accent: #fff;
   --gutter: clamp(16px, 4vw, 40px);
   --maxw: 1120px;
@@ -443,6 +443,11 @@ a { color: inherit; }
 .facts dd { margin: 4px 0 0; font-size: 18px; font-weight: 500; }
 .bullets { margin: 0; padding-left: 20px; }
 .bullets li { padding: 4px 0; }
+
+/* ---------- 404 ---------- */
+.nf { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-top: 40px; padding-bottom: 40px; }
+.nf canvas { width: min(100%, 600px); height: auto; aspect-ratio: 600 / 220; margin-bottom: 24px; touch-action: pan-y; }
+.nf h1 { font-size: clamp(32px, 5vw, 52px); letter-spacing: -0.035em; margin-bottom: 12px; }
 
 /* ---------- stars (night only) ---------- */
 .stars { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0; transition: opacity .6s ease; }
