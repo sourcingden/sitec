@@ -14,7 +14,7 @@
 ## DJ (diskevich)
 - [Home, DJ side](https://sourcingden.github.io/sitec/?side=night) and [press kit](https://sourcingden.github.io/sitec/press/): bio, quotes, guest mixes for Truancy, Nugs On Board, Breathe Records, X-Kalay, tresydos, LOWMONEYMUSICLOVE and Kalahari Oyster Cult; press photos.
 - [Resident Advisor](https://ra.co/dj/diskevich): gigs.
-- [Instagram](https://www.instagram.com/___diskevich/)
+- [Instagram](https://www.instagram.com/__diskevich/)
 - Facts as data: [press.json](https://sourcingden.github.io/sitec/press.json)
 
 ## Contact
