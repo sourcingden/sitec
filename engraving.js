@@ -2,7 +2,7 @@
 // broken into dots with Atkinson dithering; one pool of particles holds a home
 // in each image, so switching sides makes the dots fly from one picture into
 // the other. Dots run from the pointer, scatter on tap and spring back home.
-// At night they pulse at 124 bpm.
+// At night they pulse at 124 bpm, and a side with "spin" (the record) keeps turning.
 (() => {
   const canvas = document.getElementById("engraving");
   if (!canvas || !canvas.getContext) return;
@@ -33,6 +33,7 @@
   let ink = 0, inkHot = 0;  // packed ABGR colours
   let pointer = { x: 0, y: 0, vx: 0, vy: 0, on: false };
   let running = false, visible = true, nextBeat = 0;
+  let theta = 0, lastNow = 0; // rotation of a spinning side, radians
   const debug = (window.__engraving = { frames: 0, particles: 0, running: false });
 
   function packColor(css, alpha) {
@@ -160,6 +161,25 @@
     const cx = cssW / 2, cy = cssH / 2;
     const R2 = RADIUS * RADIUS;
     let energy = 0;
+
+    // a spinning side (the record) turns as one piece: homes follow the absolute angle,
+    // dots and their velocities turn by the same step, so springs only handle the pushes
+    const spin = !reduced && SOURCES[side].spin;
+    const dt = Math.min(0.05, Math.max(0, (now - (lastNow || now)) / 1000));
+    lastNow = now;
+    if (spin && dt) {
+      const d = (spin * Math.PI / 180) * dt;
+      theta = (theta + d) % (Math.PI * 2);
+      const c = Math.cos(theta), s = Math.sin(theta), dc = Math.cos(d), ds = Math.sin(d);
+      const bx = homes[side].x, by = homes[side].y;
+      for (let i = 0; i < n; i++) {
+        const hx0 = bx[i] - cx, hy0 = by[i] - cy;
+        hx[i] = cx + hx0 * c - hy0 * s; hy[i] = cy + hx0 * s + hy0 * c;
+        const px = x[i] - cx, py = y[i] - cy;
+        x[i] = cx + px * dc - py * ds; y[i] = cy + px * ds + py * dc;
+        const vx0 = vx[i]; vx[i] = vx0 * dc - vy[i] * ds; vy[i] = vx0 * ds + vy[i] * dc;
+      }
+    }
     for (let i = 0; i < n; i++) {
       let ax = (hx[i] - x[i]) * SPRING, ay = (hy[i] - y[i]) * SPRING;
       if (pointer.on) {
@@ -198,6 +218,7 @@
   function wake() {
     if (running || reduced || !n || !visible || document.hidden) return;
     running = true; debug.running = true;
+    lastNow = 0; // no jump in rotation after a pause
     requestAnimationFrame(step);
   }
 

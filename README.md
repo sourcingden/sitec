@@ -27,7 +27,7 @@ Live: **https://sourcingden.github.io/sitec/** (GitHub Pages, static, no build s
     --data '{"query":"{ artist(slug:\"diskevich\"){ upcoming: events(type: LATEST, limit: 5){ date title contentUrl venue{ name area{ name } } } past: events(type: PREVIOUS, limit: 5){ date title contentUrl venue{ name area{ name } } } } }"}'
   ```
 - **Press photos** live in `assets/press/photos/` (full JPG + `-web.webp` preview) and are listed in `press.json` → `photos`.
-- **Hero dots:** `engraving.js` dithers `assets/portrait.webp` (day) and `assets/flammarion.webp` (night); tune `mid`/`spread` in the canvas `data-images` attribute.
+- **Hero dots:** `engraving.js` dithers `assets/portrait.webp` (day) and `assets/vinyl.webp` (night, drawn in code, spins at 33⅓ rpm via `"spin": 200` degrees per second); tune `mid`/`spread` in the canvas `data-images` attribute.
 
 ## Code
 - `site.js` — shared: clock, copy buttons (`data-copy="<id>"`).

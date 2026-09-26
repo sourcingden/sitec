@@ -1,5 +1,5 @@
 {
-  "_readme": "DJ facts for the night side and /press/. Edit freely: empty strings and empty lists hide their block on the site. Gigs come from Resident Advisor (see README for the query to refresh them).",
+  "_readme": "DJ facts for the night side and /press/. Edit freely: empty strings and empty lists hide their block on the site. Gigs come from Resident Advisor (see README for the query to refresh them). To show Instagram posts, add their links to instagramPosts, e.g. \"https://www.instagram.com/p/ABC123xyz/\".",
   "name": "diskevich",
   "realName": "Denys Dinkevych",
   "city": "Kyiv, Ukraine",
@@ -134,7 +134,8 @@
     "playlist": "https://soundcloud.com/diskevich/sets/mixes-highlight",
     "youtube": "",
     "telegram": "https://t.me/sourcingdenis",
-    "ra": "https://ra.co/dj/diskevich"
+    "ra": "https://ra.co/dj/diskevich",
+    "instagram": "https://www.instagram.com/diskevich/"
   },
   "photos": [
     {
@@ -177,5 +178,6 @@
       "caption": "Black and white, at the mic",
       "alt": "Black-and-white portrait of diskevich talking at a microphone"
     }
-  ]
+  ],
+  "instagramPosts": []
 }

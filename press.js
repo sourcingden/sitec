@@ -46,6 +46,22 @@
         return g.url ? `<li><a href="${esc(g.url)}" ${ext}>${inner}</a></li>` : `<li><div class="row">${inner}</div></li>`;
       });
       fill("press-rider", p.rider, (r) => `<li>${esc(r)}</li>`);
+      // Instagram posts: click-to-load, so nothing from Instagram loads until a visitor asks for it
+      const codes = (p.instagramPosts || []).map((u) => (String(u).match(/instagram\.com\/(?:p|reel)\/([A-Za-z0-9_-]+)/) || [])[1]).filter(Boolean);
+      const box = document.getElementById("insta-posts");
+      if (box) {
+        box.innerHTML = codes.map((c, i) => `<li><button type="button" class="insta-load" data-code="${esc(c)}"><span aria-hidden="true">◎</span> Load Instagram post ${i + 1}</button></li>`).join("");
+        box.hidden = !codes.length;
+        box.addEventListener("click", (e) => {
+          const b = e.target.closest(".insta-load");
+          if (!b) return;
+          const f = document.createElement("iframe");
+          f.src = `https://www.instagram.com/p/${b.dataset.code}/embed/captioned/`;
+          f.title = "Instagram post by diskevich";
+          f.loading = "lazy";
+          b.replaceWith(f);
+        });
+      }
       // external profile links: <a data-press-link="ra"> gets its href from links.ra
       for (const a of document.querySelectorAll("[data-press-link]")) {
         const url = (p.links || {})[a.dataset.pressLink];

@@ -48,6 +48,7 @@
     "https://linkedin.com/in/sourcingdenis",
     "https://soundcloud.com/diskevich",
     "https://ra.co/dj/diskevich",
+    "https://www.instagram.com/diskevich/",
     "https://t.me/sourcingdenis"
   ]
 }
@@ -101,11 +102,11 @@
 
     <figure class="art">
       <canvas class="dots" id="engraving" tabindex="0" role="img"
-        data-images='{"day":{"src":"assets/portrait.webp","mid":145,"spread":45},"night":{"src":"assets/flammarion.webp","mid":120,"spread":26}}'
-        aria-label="Interactive dot picture: a portrait of Denys by day, the 1888 Flammarion engraving by night. Move over it to scatter the dots, tap to rebuild."></canvas>
+        data-images='{"day":{"src":"assets/portrait.webp","mid":145,"spread":45},"night":{"src":"assets/vinyl.webp","mid":150,"spread":34,"spin":200}}'
+        aria-label="Interactive dot picture: a portrait of Denys by day, a spinning vinyl record by night. Move over it to scatter the dots, tap to rebuild."></canvas>
       <img class="art-fallback" src="assets/portrait.webp" width="700" height="564" alt="Portrait of Denys Dinkevych">
       <figcaption class="mono">
-        <span data-only="day">Portrait in dots</span><span data-only="night">Flammarion engraving, 1888</span>
+        <span data-only="day">Portrait in dots</span><span data-only="night">diskevich · 33⅓ rpm</span>
         · <span class="hint">move to scatter · tap to rebuild</span>
       </figcaption>
     </figure>
@@ -243,6 +244,19 @@
     </div>
   </section>
 
+  <section id="instagram" class="block" data-only="night">
+    <div class="insta-card">
+      <img src="assets/press/photos/diskevich-02-web.webp" width="96" height="96" alt="" loading="lazy">
+      <div>
+        <p class="eyebrow mono">Instagram</p>
+        <h2>@diskevich</h2>
+        <p>Digs, gigs and the rest of the night shift.</p>
+      </div>
+      <a class="btn btn-primary" href="https://www.instagram.com/diskevich/" data-press-link="instagram" target="_blank" rel="noopener">Follow on Instagram ↗</a>
+    </div>
+    <ul class="insta-posts" id="insta-posts" hidden></ul>
+  </section>
+
   <!-- ============ CONTACT ============ -->
   <section id="contact" class="block contact">
     <h2 data-only="day">Hiring, or want to swap sourcing notes?</h2>
@@ -253,13 +267,14 @@
       <a class="btn btn-ghost" href="https://linkedin.com/in/sourcingdenis" target="_blank" rel="noopener">LinkedIn ↗</a>
       <a class="btn btn-ghost" href="https://soundcloud.com/diskevich" target="_blank" rel="noopener">SoundCloud ↗</a>
       <a class="btn btn-ghost" href="https://ra.co/dj/diskevich" data-only="night" target="_blank" rel="noopener">Resident Advisor ↗</a>
+      <a class="btn btn-ghost" href="https://www.instagram.com/diskevich/" data-only="night" target="_blank" rel="noopener">Instagram ↗</a>
     </div>
   </section>
 </main>
 
 <footer class="foot wrap">
   <p class="mono" id="clock">Kyiv</p>
-  <p class="mono small">Portrait © Denys Dinkevych · Flammarion engraving (1888), artist unknown, public domain · Last updated September 2026</p>
+  <p class="mono small">Portrait © Denys Dinkevych · Last updated September 2026</p>
 </footer>
 
 <script src="site.js" defer></script>
