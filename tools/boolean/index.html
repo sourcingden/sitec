@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" data-side="day" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Boolean & X-ray search builder — free sourcing tool</title>
+<meta name="description" content="Build LinkedIn Boolean strings and Google X-ray searches for LinkedIn, GitHub and Stack Overflow from job titles, skills and excludes. Free and private.">
+<meta name="author" content="Denys Dinkevych">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Boolean & X-ray search builder — free sourcing tool">
+<meta property="og:description" content="Build LinkedIn Boolean strings and Google X-ray searches for LinkedIn, GitHub and Stack Overflow from job titles, skills and excludes. Free and private.">
+<meta property="og:url" content="https://sourcingden.github.io/sitec/tools/boolean/">
+<meta property="og:image" content="https://sourcingden.github.io/sitec/tools/og-boolean.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sourcingden.github.io/sitec/tools/og-boolean.png">
+<link rel="canonical" href="https://sourcingden.github.io/sitec/tools/boolean/">
+<meta name="theme-color" content="#f4f1e9">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="preload" href="../../assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../styles.css">
+</head>
+<body id="top" class="sub">
+<div class="stars" aria-hidden="true"><div class="stars-layer"></div><div class="stars-layer"></div><div class="stars-layer"></div></div>
+
+<header class="bar">
+  <div class="wrap bar-inner">
+    <a class="me" href="../../?side=day">
+      <img src="../../assets/avatar.webp" width="32" height="32" alt="">
+      <span>Denys Dinkevych</span>
+    </a>
+    <nav class="subnav" aria-label="Site">
+      <a href="../../tools/" aria-current="page">Tools</a>
+      <a href="../../cases/">Cases</a>
+      <a href="../../?side=night">DJ</a>
+    </nav>
+    <a class="btn btn-primary bar-cta" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Message on Telegram</a>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+  <section class="page-head">
+    <p class="eyebrow mono"><a href="../">Tools</a> / Search</p>
+    <h1>Boolean &amp; X-ray builder</h1>
+    <p class="lede">Type a role once, get four search strings. Multi-word terms are quoted for you, duplicates and stray quotes are cleaned up. <p class="privacy mono">Runs entirely in your browser. Nothing you type is sent anywhere.</p></p>
+  </section>
+  <section class="block tight">
+    <form class="bool" id="bool-form" autocomplete="off">
+      <label>Job titles <small>comma-separated, any of</small>
+        <input name="titles" value="Senior Backend Engineer, Backend Developer"></label>
+      <label>Must-have skills <small>all of</small>
+        <input name="skills" value="Go, Kubernetes"></label>
+      <label>Exclude <small>none of</small>
+        <input name="exclude" value="recruiter, intern"></label>
+      <label>Location <small>optional, X-ray searches only</small>
+        <input name="location" value="Warsaw"></label>
+    </form>
+    <div class="bool-out">
+      <div class="out-card">
+        <div class="out-head"><span class="mono">LinkedIn search</span><span class="out-btns"><button type="button" class="btn btn-small" data-copy="out-linkedin">Copy</button></span></div>
+        <code id="out-linkedin" data-out="linkedin"></code>
+      </div>
+      <div class="out-card">
+        <div class="out-head"><span class="mono">Google X-ray · LinkedIn profiles</span><span class="out-btns"><a class="btn btn-small" data-open="xray" href="#" target="_blank" rel="noopener">Google ↗</a><button type="button" class="btn btn-small" data-copy="out-xray">Copy</button></span></div>
+        <code id="out-xray" data-out="xray"></code>
+      </div>
+      <div class="out-card">
+        <div class="out-head"><span class="mono">Google X-ray · GitHub profiles</span><span class="out-btns"><a class="btn btn-small" data-open="github" href="#" target="_blank" rel="noopener">Google ↗</a><button type="button" class="btn btn-small" data-copy="out-github">Copy</button></span></div>
+        <code id="out-github" data-out="github"></code>
+      </div>
+      <div class="out-card">
+        <div class="out-head"><span class="mono">Google X-ray · Stack Overflow users</span><span class="out-btns"><a class="btn btn-small" data-open="stackoverflow" href="#" target="_blank" rel="noopener">Google ↗</a><button type="button" class="btn btn-small" data-copy="out-stackoverflow">Copy</button></span></div>
+        <code id="out-stackoverflow" data-out="stackoverflow"></code>
+      </div>
+    </div>
+  </section>
+  <section class="block tips">
+    <h2>How to get more out of it</h2>
+    <ul class="plain">
+      <li><h3>Test one block at a time</h3><p>If a single OR-group returns nothing, the whole string will too. Start wide, then add must-haves.</p></li>
+      <li><h3>Titles are noisy, skills are not</h3><p>On GitHub and Stack Overflow people don't have job titles — search the stack and the city instead.</p></li>
+      <li><h3>Exclude with care</h3><p>Every NOT removes real people too. Exclude titles (recruiter, intern), not skills.</p></li>
+      <li><h3>Rotate the angle</h3><p>If a string runs dry, change the title family or the geography rather than piling on more ANDs.</p></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="foot wrap">
+  <p class="mono" id="clock">Kyiv</p>
+  <p class="mono small"><a href="../../?side=day">← Denys Dinkevych</a> · Last updated September 2026</p>
+</footer>
+
+<script src="../../site.js" defer></script>
+<script src="../../boolean.js" defer></script>
+</body>
+</html>

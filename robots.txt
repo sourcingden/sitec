@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sourcingden.github.io/sitec/sitemap.xml

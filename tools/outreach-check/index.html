@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" data-side="day" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Outreach message checker — free sourcing tool</title>
+<meta name="description" content="Paste a first message to a passive candidate and get a score with concrete fixes: length, clichés, placeholders, links and the closing question. Free and private.">
+<meta name="author" content="Denys Dinkevych">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Outreach message checker — free sourcing tool">
+<meta property="og:description" content="Paste a first message to a passive candidate and get a score with concrete fixes: length, clichés, placeholders, links and the closing question. Free and private.">
+<meta property="og:url" content="https://sourcingden.github.io/sitec/tools/outreach-check/">
+<meta property="og:image" content="https://sourcingden.github.io/sitec/tools/og-outreach.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sourcingden.github.io/sitec/tools/og-outreach.png">
+<link rel="canonical" href="https://sourcingden.github.io/sitec/tools/outreach-check/">
+<meta name="theme-color" content="#f4f1e9">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="preload" href="../../assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../styles.css">
+</head>
+<body id="top" class="sub">
+<div class="stars" aria-hidden="true"><div class="stars-layer"></div><div class="stars-layer"></div><div class="stars-layer"></div></div>
+
+<header class="bar">
+  <div class="wrap bar-inner">
+    <a class="me" href="../../?side=day">
+      <img src="../../assets/avatar.webp" width="32" height="32" alt="">
+      <span>Denys Dinkevych</span>
+    </a>
+    <nav class="subnav" aria-label="Site">
+      <a href="../../tools/" aria-current="page">Tools</a>
+      <a href="../../cases/">Cases</a>
+      <a href="../../?side=night">DJ</a>
+    </nav>
+    <a class="btn btn-primary bar-cta" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Message on Telegram</a>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+  <section class="page-head">
+    <p class="eyebrow mono"><a href="../">Tools</a> / Outreach</p>
+    <h1>Outreach message checker</h1>
+    <p class="lede">Paste your first message to a passive candidate. You get a score and a concrete fix for every miss — the checks I run before any first message goes out. <p class="privacy mono">Runs entirely in your browser. Nothing you type is sent anywhere.</p></p>
+  </section>
+  <section class="block tight check">
+    <div class="check-input">
+      <label for="msg" class="mono">Your message</label>
+      <textarea id="msg" rows="10" placeholder="Hi {first_name}, …" data-example="Hi Maria, your talk on scaling Postgres at PGConf stuck with me, especially the part about partitioning billing data. We're rebuilding exactly that in a small fintech team, and you would own the data layer from day one. Fully remote works too. Would you be open to a 15-minute call next week to see if it's even interesting for you?"></textarea>
+      <button type="button" class="btn btn-ghost btn-small" id="msg-example">Paste an example</button>
+    </div>
+    <div class="check-result" aria-live="polite">
+      <div class="meter" id="meter"><span id="score">—</span><small>/100</small></div>
+      <p class="mono" id="score-meta">Paste a message to get a score.</p>
+      <ul class="checks" id="checks"></ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot wrap">
+  <p class="mono" id="clock">Kyiv</p>
+  <p class="mono small"><a href="../../?side=day">← Denys Dinkevych</a> · Last updated September 2026</p>
+</footer>
+
+<script src="../../site.js" defer></script>
+<script src="outreach.js" defer></script>
+</body>
+</html>

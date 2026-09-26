@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" data-side="day" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Email pattern generator — free sourcing tool</title>
+<meta name="description" content="Turn a name and a company domain into the most common corporate email formats. Transliterates Ukrainian and Russian names. Free and private.">
+<meta name="author" content="Denys Dinkevych">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Email pattern generator — free sourcing tool">
+<meta property="og:description" content="Turn a name and a company domain into the most common corporate email formats. Transliterates Ukrainian and Russian names. Free and private.">
+<meta property="og:url" content="https://sourcingden.github.io/sitec/tools/email-patterns/">
+<meta property="og:image" content="https://sourcingden.github.io/sitec/tools/og-email.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sourcingden.github.io/sitec/tools/og-email.png">
+<link rel="canonical" href="https://sourcingden.github.io/sitec/tools/email-patterns/">
+<meta name="theme-color" content="#f4f1e9">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="preload" href="../../assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../styles.css">
+</head>
+<body id="top" class="sub">
+<div class="stars" aria-hidden="true"><div class="stars-layer"></div><div class="stars-layer"></div><div class="stars-layer"></div></div>
+
+<header class="bar">
+  <div class="wrap bar-inner">
+    <a class="me" href="../../?side=day">
+      <img src="../../assets/avatar.webp" width="32" height="32" alt="">
+      <span>Denys Dinkevych</span>
+    </a>
+    <nav class="subnav" aria-label="Site">
+      <a href="../../tools/" aria-current="page">Tools</a>
+      <a href="../../cases/">Cases</a>
+      <a href="../../?side=night">DJ</a>
+    </nav>
+    <a class="btn btn-primary bar-cta" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Message on Telegram</a>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+  <section class="page-head">
+    <p class="eyebrow mono"><a href="../">Tools</a> / Contact</p>
+    <h1>Email pattern generator</h1>
+    <p class="lede">Name and company domain in, the 12 most common corporate email formats out — most common first. Cyrillic names are transliterated with the official Ukrainian scheme. <p class="privacy mono">Runs entirely in your browser. Nothing you type is sent anywhere.</p></p>
+  </section>
+  <section class="block tight">
+    <form class="bool" id="email-form" autocomplete="off">
+      <label>First name <small>Latin or Cyrillic</small><input name="first" value="Денис"></label>
+      <label>Last name<input name="last" value="Дінкевич"></label>
+      <label class="wide">Company domain or website <small>e.g. acme.io or https://www.acme.io/careers</small><input name="domain" value="acme.io"></label>
+    </form>
+    <p class="hint mono" id="email-hint" hidden>Add a first name and a valid domain.</p>
+    <ol class="email-list" id="email-list"></ol>
+    <div class="out-card">
+      <div class="out-head"><span class="mono">All patterns, comma-separated</span><span class="out-btns"><button type="button" class="btn btn-small" data-copy="email-all">Copy all</button></span></div>
+      <textarea id="email-all" class="mono" rows="3" readonly aria-label="All email patterns"></textarea>
+    </div>
+    <p class="note">These are guesses, not verified addresses. Check them with your email verification tool before sending — and send one, not twelve.</p>
+  </section>
+
+</main>
+
+<footer class="foot wrap">
+  <p class="mono" id="clock">Kyiv</p>
+  <p class="mono small"><a href="../../?side=day">← Denys Dinkevych</a> · Last updated September 2026</p>
+</footer>
+
+<script src="../../site.js" defer></script>
+<script src="email.js" defer></script>
+</body>
+</html>

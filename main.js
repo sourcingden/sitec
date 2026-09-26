@@ -96,16 +96,4 @@
   $("sc-load").addEventListener("click", loadPlayer);
   for (const a of document.querySelectorAll("[data-play]")) a.addEventListener("click", loadPlayer);
 
-  /* ---------------- Kyiv clock ---------------- */
-  const fmt = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Kyiv", hour: "2-digit", minute: "2-digit", hour12: false });
-  function tick() {
-    const time = fmt.format(new Date());
-    const h = parseInt(time, 10);
-    let status = "probably asleep";
-    if (h >= 9 && h < 19) status = "probably sourcing";
-    else if (h >= 19 || h < 3) status = "probably mixing";
-    $("clock").textContent = `Kyiv, ${time} — ${status}`;
-  }
-  tick();
-  setInterval(tick, 15000);
 })();

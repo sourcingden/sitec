@@ -34,6 +34,25 @@
     return parts.join(" ");
   }
 
+  // GitHub profiles have no job titles: search by skills and location, and keep to user pages
+  function githubString({ skills = [], exclude = [], location = "" }) {
+    const parts = ["site:github.com"];
+    for (const sk of skills) parts.push(qAlways(sk));
+    if (location) parts.push(qAlways(location));
+    parts.push('"followers"', "-inurl:topics", "-inurl:orgs", "-inurl:blob", "-inurl:issues");
+    for (const x of exclude) parts.push("-" + q(x));
+    return parts.join(" ");
+  }
+
+  // Stack Overflow user pages list top tags and location
+  function stackoverflowString({ skills = [], exclude = [], location = "" }) {
+    const parts = ["site:stackoverflow.com/users"];
+    for (const sk of skills) parts.push(qAlways(sk));
+    if (location) parts.push(qAlways(location));
+    for (const x of exclude) parts.push("-" + q(x));
+    return parts.join(" ");
+  }
+
   function build(fields) {
     const input = {
       titles: splitTerms(fields.titles),
@@ -42,54 +61,41 @@
       location: splitTerms(fields.location)[0] || "",
     };
     const empty = !input.titles.length && !input.skills.length;
+    const noSkills = !input.skills.length;
     return {
       linkedin: empty ? "" : linkedinString(input),
       xray: empty ? "" : xrayString(input),
+      github: noSkills ? "" : githubString(input),
+      stackoverflow: noSkills ? "" : stackoverflowString(input),
     };
   }
 
-  const api = { splitTerms, linkedinString, xrayString, build };
+  const api = { splitTerms, linkedinString, xrayString, githubString, stackoverflowString, build };
   if (typeof module !== "undefined" && module.exports) { module.exports = api; return; }
   global.booleanBuilder = api;
 
   // ---------------- DOM ----------------
   const form = document.getElementById("bool-form");
   if (!form) return;
-  const outLi = document.getElementById("bool-linkedin");
-  const outX = document.getElementById("bool-xray");
-  const google = document.getElementById("bool-google");
+  const HINT = {
+    linkedin: "Add a job title or a skill to get a string.",
+    xray: "Add a job title or a skill to get a string.",
+    github: "Add at least one skill: GitHub profiles have no job titles.",
+    stackoverflow: "Add at least one skill: Stack Overflow profiles are searched by tags.",
+  };
 
   function update() {
     const r = build(Object.fromEntries(new FormData(form)));
-    outLi.textContent = r.linkedin || "Add a job title or a skill to get a string.";
-    outX.textContent = r.xray || "—";
-    outLi.classList.toggle("is-empty", !r.linkedin);
-    outX.classList.toggle("is-empty", !r.xray);
-    google.href = r.xray ? "https://www.google.com/search?q=" + encodeURIComponent(r.xray) : "#";
-    google.toggleAttribute("aria-disabled", !r.xray);
-  }
-
-  async function copyText(text) {
-    try { await navigator.clipboard.writeText(text); return true; } catch (e) {}
-    const ta = document.createElement("textarea");
-    ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.left = "-9999px";
-    document.body.appendChild(ta); ta.select();
-    let ok = false;
-    try { ok = document.execCommand("copy"); } catch (e) {}
-    ta.remove();
-    return ok;
-  }
-
-  for (const btn of document.querySelectorAll("[data-copy]")) {
-    btn.addEventListener("click", async () => {
-      const src = document.getElementById(btn.dataset.copy);
-      if (src.classList.contains("is-empty")) return;
-      const ok = await copyText(src.textContent);
-      const label = btn.textContent;
-      btn.textContent = ok ? "Copied ✓" : "Select & copy";
-      btn.classList.toggle("copied", ok);
-      setTimeout(() => { btn.textContent = label; btn.classList.remove("copied"); }, 1600);
-    });
+    for (const el of document.querySelectorAll("[data-out]")) {
+      const v = r[el.dataset.out];
+      el.textContent = v || HINT[el.dataset.out];
+      el.classList.toggle("is-empty", !v);
+    }
+    for (const a of document.querySelectorAll("[data-open]")) {
+      const v = r[a.dataset.open];
+      a.href = v ? "https://www.google.com/search?q=" + encodeURIComponent(v) : "#";
+      a.toggleAttribute("aria-disabled", !v);
+    }
   }
 
   form.addEventListener("input", update);
