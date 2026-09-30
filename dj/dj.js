@@ -12,18 +12,26 @@
     iframe.focus();
   });
 
-  const box = document.getElementById("sc-facade");
-  if (!box) return;
-  function loadPlayer() {
-    if (box.classList.contains("loaded")) return;
+  // SoundCloud: each top-mix card swaps its play button for that mix's player
+  // (delegated, because press.js re-renders the cards from press.json)
+  function playMix(btn) {
+    const card = btn.closest(".mix-card");
     const iframe = document.createElement("iframe");
-    iframe.title = "mixes spotlight by diskevich on SoundCloud";
+    iframe.title = btn.getAttribute("aria-label").replace(/^Play /, "") + " on SoundCloud";
     iframe.allow = "autoplay";
-    iframe.src = "https://w.soundcloud.com/player/?url=" + encodeURIComponent("https://soundcloud.com/diskevich/sets/mixes-highlight") +
-      "&color=%23ff6a2b&auto_play=true&hide_related=true&show_comments=false&show_user=true&visual=false";
-    box.replaceChildren(iframe);
-    box.classList.add("loaded");
+    iframe.src = "https://w.soundcloud.com/player/?url=" + encodeURIComponent(btn.dataset.url) +
+      "&color=%23ff6a2b&auto_play=true&hide_related=true&show_comments=false&show_user=true&visual=true";
+    card.replaceChildren(iframe);
+    card.classList.add("loaded");
   }
-  document.getElementById("sc-load").addEventListener("click", loadPlayer);
-  for (const a of document.querySelectorAll("[data-play]")) a.addEventListener("click", loadPlayer);
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".mix-play");
+    if (btn) { playMix(btn); return; }
+    // "Play the mixes" in the hero starts the most played one
+    const hero = e.target.closest("[data-play]");
+    if (hero) {
+      const first = document.querySelector(".mix-play");
+      if (first) playMix(first);
+    }
+  });
 })();

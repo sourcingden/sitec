@@ -29,12 +29,12 @@ Live: **https://sourcingden.github.io/sitec/** (GitHub Pages, static, no build s
     --data '{"query":"{ artist(slug:\"diskevich\"){ upcoming: events(type: LATEST, limit: 5){ date title contentUrl venue{ name area{ name } } } past: events(type: PREVIOUS, limit: 5){ date title contentUrl venue{ name area{ name } } } } }"}'
   ```
 - **Press photos** live in `assets/press/photos/` (full JPG + `-web.webp` preview) and are listed in `press.json` → `photos`.
-- **Hero dots:** `engraving.js` dithers `assets/portrait-hero.webp` on `/` (a cropped, mirrored `portrait.webp`, so the face looks towards the text) and `assets/vinyl.webp` on `/dj/` (spins at 33⅓ rpm via `"spin": 200` degrees per second); tune `mid`/`spread` in the canvas `data-images` attribute.
+- **Hero dots:** `engraving.js` dithers `assets/portrait-2026.webp` on `/` (a studio portrait prepared for dots: side light flattened, backdrop washed to white) and `assets/vinyl.webp` on `/dj/` (spins at 33⅓ rpm via `"spin": 200` degrees per second); tune `mid`/`spread` in the canvas `data-images` attribute.
 
 ## Code
 - `styles.css` — one stylesheet: tokens (light for sourcing, dark for diskevich), then components, then breakpoints.
 - `site.js` — shared: mobile menu, clock, copy buttons (`data-copy="<id>"`).
 - `dj/dj.js` — YouTube and SoundCloud players on `/dj/` (both load only on click; the video shows a local thumbnail from `assets/video/` until then).
 - `boolean.js`, `tools/email-patterns/email.js`, `tools/outreach-check/outreach.js` — pure functions, testable in Node (`require()` them).
-- `cases/cases.js` — demo dashboards. `press.js` — renders `press.json`.
+- `cases/cases.js` — demo dashboards. `press.js` — renders `press.json`; on `/dj/` the three most-played mixes (by `plays`) become players, the rest a list.
 - Fonts are self-hosted in `assets/fonts/` (SIL Open Font License).

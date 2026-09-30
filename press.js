@@ -30,7 +30,16 @@
       const fill = (id, items, render) => { const el = document.getElementById(id); if (el) el.innerHTML = items.map(render).join(""); };
       fill("press-quotes", p.quotes, (q) =>
         `<li><blockquote>“${esc(q.text.replace(/^[“"]|[”"]$/g, ""))}”</blockquote><a class="mono" href="${esc(q.url)}" ${ext}>— ${esc(q.source)} ↗</a></li>`);
-      fill("press-mixes", p.mixes, (m) =>
+      // the three most-played mixes get their own players (#top-mixes), the rest stay a list
+      const byPlays = [...p.mixes].sort((a, b) => (b.plays || 0) - (a.plays || 0));
+      const hasTop = !!document.getElementById("top-mixes");
+      // don't rebuild the cards if a player is already running in one of them
+      if (!document.querySelector(".mix-card.loaded")) fill("top-mixes", byPlays.slice(0, 3), (m, i) =>
+        `<li class="mix-card dotgrid"><p class="mix-top mono"><span>${String(i + 1).padStart(2, "0")}</span><span>${fmtK(m.plays)} plays</span></p>` +
+        `<h3>${esc(m.label)}</h3><p class="mix-title">${esc(m.title)}</p>` +
+        `<div class="mix-foot"><button type="button" class="sc-play mix-play" data-url="${esc(m.url)}" aria-label="Play ${esc(m.title)} for ${esc(m.label)}"><span aria-hidden="true">▶</span></button>` +
+        `<a class="mono" href="${esc(m.url)}" ${ext}>SoundCloud ↗</a></div></li>`);
+      fill("press-mixes", hasTop ? byPlays.slice(3) : p.mixes, (m) =>
         `<li><a href="${esc(m.url)}" ${ext}><span>${esc(m.label)}</span><em>${esc(m.title)}</em><small class="mono">${fmtK(m.plays)} plays</small></a></li>`);
       fill("press-coverage", p.press, (a) =>
         `<li><a href="${esc(a.url)}" ${ext}><span>${esc(a.title)}</span><em>${esc(a.outlet)} · ${esc(a.date.slice(0, 4))}</em></a></li>`);

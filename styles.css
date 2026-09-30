@@ -539,21 +539,30 @@ img { max-width: 100%; }
 .yt-cap .mono { font-size: 12.5px; color: var(--muted); }
 .yt-cap a { color: var(--accent); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
 
-/* player */
-.listen { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: start; }
-.sc-facade {
-  display: flex; flex-direction: column; justify-content: space-between; gap: 40px; min-height: 340px;
-  padding: clamp(20px, 3vw, 32px); border-radius: var(--radius); border: 1px solid var(--line); background-color: var(--panel);
+/* sub-heads inside a section */
+.sub-h { font-size: 13px; font-family: "JetBrains Mono", monospace; font-weight: 400; letter-spacing: .03em; color: var(--muted); margin: 0 0 14px; }
+
+/* three most played mixes: one card each, the player replaces the card on play */
+.top-mixes { list-style: none; margin: 0 0 clamp(28px, 4vw, 48px); padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.mix-card {
+  display: flex; flex-direction: column; min-height: 300px; padding: 22px;
+  border-radius: var(--radius); border: 1px solid var(--line); background-color: var(--panel);
 }
-.sc-facade.loaded { display: block; padding: 0; border: 0; min-height: 0; background: none; }
-.sc-facade iframe { width: 100%; height: 450px; border: 0; border-radius: 12px; display: block; }
+.mix-card.loaded { padding: 0; border: 0; background: none; }
+.mix-card iframe { width: 100%; height: 300px; border: 0; border-radius: var(--radius); display: block; }
+.mix-top { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--muted); margin-bottom: 18px; }
+.mix-top span:first-child { color: var(--accent); }
+.mix-card h3 { font-size: clamp(22px, 2.2vw, 28px); letter-spacing: -0.03em; overflow-wrap: anywhere; }
+.mix-title { color: var(--muted); margin-top: 6px; }
+.mix-foot { margin-top: auto; padding-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.mix-foot a { font-size: 12.5px; color: var(--muted); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+.mix-card .sc-play { width: 72px; height: 72px; font-size: 26px; }
 .sc-play {
   flex: none; width: 96px; height: 96px; border-radius: 50%; border: 0;
   background: var(--accent); color: var(--on-accent); font-size: 34px; cursor: pointer; touch-action: manipulation;
   transition: transform .15s;
 }
-.sc-title { font-weight: 600; font-size: clamp(24px, 2.6vw, 32px); letter-spacing: -0.03em; }
-.sc-note { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+.mixlist.more-mixes { counter-reset: mix 3; }
 .mixlist { list-style: none; margin: 0; padding: 0; counter-reset: mix; }
 .mixlist li { border-top: 1px solid var(--line); counter-increment: mix; }
 .mixlist li:last-child { border-bottom: 1px solid var(--line); }
@@ -675,7 +684,7 @@ img { max-width: 100%; }
 @media (max-width: 900px) {
   .stats { grid-template-columns: repeat(2, 1fr); }
   .stats li:nth-child(3) { padding-left: 0; border-left: 0; }
-  .band-grid, .case-feature, .listen, .tool-layout { grid-template-columns: 1fr; }
+  .band-grid, .case-feature, .tool-layout { grid-template-columns: 1fr; }
   .tool-layout > .pane-out { position: static; }
   .tool-grid, .more-tools { grid-template-columns: 1fr 1fr; }
   .viz-body.two { grid-template-columns: 1fr; }
@@ -736,8 +745,8 @@ img { max-width: 100%; }
   .gallery figcaption { flex-direction: column; align-items: flex-start; }
   .gigs-next a, .gigs-next .row { grid-template-columns: 1fr; padding: 18px; }
   .yt-play .sc-play { width: 64px; height: 64px; font-size: 24px; }
-  .sc-facade { min-height: 0; flex-direction: row; align-items: center; gap: 18px; }
-  .sc-facade .sc-play { width: 72px; height: 72px; font-size: 26px; }
+  .top-mixes { grid-template-columns: 1fr; }
+  .mix-card { min-height: 0; }
   .insta-card { grid-template-columns: 64px 1fr; }
   .insta-card img { width: 64px; height: 64px; }
   .insta-card .btn { grid-column: 1 / -1; }
