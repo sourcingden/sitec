@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="en" data-side="day" data-theme="light">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>document.documentElement.classList.add("js");</script>
 <title>Case studies — Denys Dinkevych</title>
 <meta name="description" content="How I build sourcing infrastructure: a funnel you can defend, bonuses tied to output, and an ATS migration from Recruitee to Ashby. With interactive demo dashboards.">
 <meta name="author" content="Denys Dinkevych">
@@ -14,7 +15,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://sourcingden.github.io/sitec/cases/og-cases.png">
 <link rel="canonical" href="https://sourcingden.github.io/sitec/cases/">
-<meta name="theme-color" content="#f4f1e9">
+<meta name="theme-color" content="#f6f6f3">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="manifest" href="../manifest.webmanifest">
@@ -23,34 +24,42 @@
 <link rel="stylesheet" href="../styles.css">
 </head>
 <body id="top" class="sub">
-<div class="stars" aria-hidden="true"><div class="stars-layer"></div><div class="stars-layer"></div><div class="stars-layer"></div></div>
+<a class="skip" href="#main">Skip to content</a>
 
 <header class="bar">
   <div class="wrap bar-inner">
-    <a class="me" href="../?side=day" aria-label="Denys Dinkevych — home">
-      <img src="../assets/avatar.webp" width="32" height="32" alt="">
-      <span>Denys Dinkevych</span>
+    <a class="brand" href="../" aria-label="Denys Dinkevych — home">
+      <img src="../assets/avatar.webp" width="34" height="34" alt="">
+      <span class="brand-name">Denys Dinkevych<small class="mono">Talent Sourcing Lead</small></span>
     </a>
-    <nav class="subnav" aria-label="Site">
+    <nav class="nav" id="nav" aria-label="Site">
       <a href="../tools/">Tools</a>
       <a href="../cases/" aria-current="page">Cases</a>
-      <a href="../?side=night">DJ</a>
+      <a href="../#experience">Experience</a>
+      <a href="../cv/">CV</a>
+      <a class="nav-cross" href="../dj/">diskevich</a>
     </nav>
-    <a class="btn btn-primary bar-cta" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Message on Telegram</a>
+    <a class="btn btn-primary bar-cta" href="../#contact"><span class="long">Get in touch</span><span class="short">Contact</span></a>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
   </div>
 </header>
 
 <main id="main" class="wrap">
 
   <section class="page-head">
-    <p class="eyebrow mono">Case studies</p>
+    <p class="crumbs mono">Case studies</p>
     <h1>Sourcing infrastructure, shown not told</h1>
     <p class="lede">Three pieces of work, each as problem → what I did → result. The dashboards are interactive but run on invented numbers: real hiring data stays where it belongs.</p>
+    <nav class="case-nav" aria-label="Cases">
+      <a href="#funnel-case"><span class="mono">01</span>A funnel you can defend</a>
+      <a href="#bonus-case"><span class="mono">02</span>Bonuses tied to output</a>
+      <a href="#migration-case"><span class="mono">03</span>From Recruitee to Ashby</a>
+    </nav>
   </section>
 
   <article class="case" id="funnel-case">
     <div class="case-head">
-      <p class="eyebrow mono">Case 01 · Metrics</p>
+      <p class="case-num mono">01 · Metrics</p>
       <h2>A funnel you can defend</h2>
     </div>
     <dl class="pdr">
@@ -78,11 +87,12 @@
       </div>
       <details class="viz-table"><summary>Show the numbers as a table</summary><div class="table-wrap"><table id="funnel-table"></table></div></details>
     </div>
+    <p class="case-next"><a href="#bonus-case">Next: Bonuses tied to output ↓</a></p>
   </article>
 
   <article class="case" id="bonus-case">
     <div class="case-head">
-      <p class="eyebrow mono">Case 02 · Incentives</p>
+      <p class="case-num mono">02 · Incentives</p>
       <h2>Bonuses tied to output</h2>
     </div>
     <dl class="pdr">
@@ -106,11 +116,12 @@
       </div>
       <details class="viz-table"><summary>Show the breakdown as a table</summary><div class="table-wrap"><table id="bonus-table"></table></div></details>
     </div>
+    <p class="case-next"><a href="#migration-case">Next: From Recruitee to Ashby ↓</a></p>
   </article>
 
   <article class="case" id="migration-case">
     <div class="case-head">
-      <p class="eyebrow mono">Case 03 · Systems</p>
+      <p class="case-num mono">03 · Systems</p>
       <h2>From Recruitee to Ashby</h2>
     </div>
     <dl class="pdr">
@@ -127,11 +138,14 @@
     </ol>
   </article>
 
-  <section class="block contact">
-    <h2>Building something like this?</h2>
-    <div class="actions">
-      <a class="btn btn-primary btn-big" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Telegram · sourcingdenis.t.me</a>
-      <a class="btn btn-ghost" href="https://linkedin.com/in/sourcingdenis" target="_blank" rel="noopener">LinkedIn ↗</a>
+  <section class="block">
+    <div class="contact-block dotgrid">
+      <h2>Building something like this?</h2>
+      <p>Metrics, incentives, ATS moves and AI tooling for sourcing teams. Telegram is the fastest way to reach me.</p>
+      <div class="actions">
+        <a class="btn btn-accent btn-big" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Message on Telegram</a>
+        <a class="btn btn-ghost btn-big" href="https://linkedin.com/in/sourcingdenis" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
     </div>
   </section>
   <div class="viz-tip" id="viz-tip" role="tooltip" hidden></div>
@@ -140,7 +154,8 @@
 
 <footer class="foot wrap">
   <p class="mono" id="clock">Kyiv</p>
-  <p class="mono small"><a href="../?side=day">← Denys Dinkevych</a> · Last updated September 2026</p>
+  <a class="cross" href="../dj/"><span class="disc" aria-hidden="true"></span>By night I play records as diskevich →</a>
+  <p class="mono">Updated September 2026</p>
 </footer>
 
 <script src="../site.js" defer></script>

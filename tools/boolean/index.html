@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="en" data-side="day" data-theme="light">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>document.documentElement.classList.add("js");</script>
 <title>Boolean & X-ray search builder — free sourcing tool</title>
 <meta name="description" content="Build LinkedIn Boolean strings and Google X-ray searches for LinkedIn, GitHub and Stack Overflow from job titles, skills and excludes. Free and private.">
 <meta name="author" content="Denys Dinkevych">
@@ -14,7 +15,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://sourcingden.github.io/sitec/tools/og-boolean.png">
 <link rel="canonical" href="https://sourcingden.github.io/sitec/tools/boolean/">
-<meta name="theme-color" content="#f4f1e9">
+<meta name="theme-color" content="#f6f6f3">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
 <link rel="manifest" href="../../manifest.webmanifest">
@@ -23,32 +24,43 @@
 <link rel="stylesheet" href="../../styles.css">
 </head>
 <body id="top" class="sub">
-<div class="stars" aria-hidden="true"><div class="stars-layer"></div><div class="stars-layer"></div><div class="stars-layer"></div></div>
+<a class="skip" href="#main">Skip to content</a>
 
 <header class="bar">
   <div class="wrap bar-inner">
-    <a class="me" href="../../?side=day" aria-label="Denys Dinkevych — home">
-      <img src="../../assets/avatar.webp" width="32" height="32" alt="">
-      <span>Denys Dinkevych</span>
+    <a class="brand" href="../../" aria-label="Denys Dinkevych — home">
+      <img src="../../assets/avatar.webp" width="34" height="34" alt="">
+      <span class="brand-name">Denys Dinkevych<small class="mono">Talent Sourcing Lead</small></span>
     </a>
-    <nav class="subnav" aria-label="Site">
+    <nav class="nav" id="nav" aria-label="Site">
       <a href="../../tools/" aria-current="page">Tools</a>
       <a href="../../cases/">Cases</a>
-      <a href="../../?side=night">DJ</a>
+      <a href="../../#experience">Experience</a>
+      <a href="../../cv/">CV</a>
+      <a class="nav-cross" href="../../dj/">diskevich</a>
     </nav>
-    <a class="btn btn-primary bar-cta" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Message on Telegram</a>
+    <a class="btn btn-primary bar-cta" href="../../#contact"><span class="long">Get in touch</span><span class="short">Contact</span></a>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
   </div>
 </header>
 
 <main id="main" class="wrap">
 
   <section class="page-head">
-    <p class="eyebrow mono"><a href="../">Tools</a> / Search</p>
+    <p class="crumbs mono"><a href="../">Tools</a> / Search</p>
     <h1>Boolean &amp; X-ray builder</h1>
-    <p class="lede">Type a role once, get four search strings. Multi-word terms are quoted for you, duplicates and stray quotes are cleaned up. <p class="privacy mono">Runs entirely in your browser. Nothing you type is sent anywhere.</p></p>
+    <p class="lede">Type a role once, get four search strings. Multi-word terms are quoted for you, duplicates and stray quotes are cleaned up.</p>
+    <p class="privacy mono">Runs entirely in your browser. Nothing you type is sent anywhere.</p>
   </section>
-  <section class="block tight">
-    <form class="bool" id="bool-form" autocomplete="off">
+  <section class="block tight tool-layout">
+    <div class="pane-in">
+    <div class="presets" role="group" aria-label="Examples">
+      <span class="mono">Try:</span>
+      <button type="button" data-preset='{"titles":"Senior Backend Engineer, Backend Developer","skills":"Go, Kubernetes","exclude":"recruiter, intern","location":"Warsaw"}'>Backend Go · Warsaw</button>
+      <button type="button" data-preset='{"titles":"Data Engineer, Analytics Engineer","skills":"dbt, Airflow","exclude":"recruiter, intern","location":"Berlin"}'>Data · Berlin</button>
+      <button type="button" data-preset='{"titles":"iOS Engineer, iOS Developer","skills":"Swift, SwiftUI","exclude":"recruiter, intern, trainee","location":"Kyiv"}'>iOS · Kyiv</button>
+    </div>
+    <form class="bool" id="bool-form" autocomplete="off" data-url-state>
       <label>Job titles <small>comma-separated, any of</small>
         <input name="titles" value="Senior Backend Engineer, Backend Developer"></label>
       <label>Must-have skills <small>all of</small>
@@ -58,7 +70,9 @@
       <label>Location <small>optional, X-ray searches only</small>
         <input name="location" value="Warsaw"></label>
     </form>
-    <div class="bool-out">
+    <p class="hint mono">The URL updates as you type — share it to share the search.</p>
+    </div>
+    <div class="bool-out pane-out">
       <div class="out-card">
         <div class="out-head"><span class="mono">LinkedIn search</span><span class="out-btns"><button type="button" class="btn btn-small" data-copy="out-linkedin">Copy</button></span></div>
         <code id="out-linkedin" data-out="linkedin"></code>
@@ -77,21 +91,31 @@
       </div>
     </div>
   </section>
-  <section class="block tips">
-    <h2>How to get more out of it</h2>
-    <ul class="plain">
-      <li><h3>Test one block at a time</h3><p>If a single OR-group returns nothing, the whole string will too. Start wide, then add must-haves.</p></li>
-      <li><h3>Titles are noisy, skills are not</h3><p>On GitHub and Stack Overflow people don't have job titles — search the stack and the city instead.</p></li>
-      <li><h3>Exclude with care</h3><p>Every NOT removes real people too. Exclude titles (recruiter, intern), not skills.</p></li>
-      <li><h3>Rotate the angle</h3><p>If a string runs dry, change the title family or the geography rather than piling on more ANDs.</p></li>
+  <section class="block">
+    <div class="block-head"><h2>How to get more out of it</h2></div>
+    <ul class="pubs">
+      <li><div class="row"><b>Test one block at a time</b><span>If a single OR-group returns nothing, the whole string will too. Start wide, then add must-haves.</span></div></li>
+      <li><div class="row"><b>Titles are noisy, skills are not</b><span>On GitHub and Stack Overflow people don't have job titles — search the stack and the city instead.</span></div></li>
+      <li><div class="row"><b>Exclude with care</b><span>Every NOT removes real people too. Exclude titles (recruiter, intern), not skills.</span></div></li>
+      <li><div class="row"><b>Rotate the angle</b><span>If a string runs dry, change the title family or the geography rather than piling on more ANDs.</span></div></li>
     </ul>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><h2>More tools</h2></div>
+    <div class="more-tools">
+      <a class="tool-card" href="../email-patterns/"><p class="mono tag">Contact</p><h3>Email pattern generator</h3><p>Name + domain → the 12 most common corporate email formats.</p><span class="go" aria-hidden="true">Open →</span></a>
+      <a class="tool-card" href="../outreach-check/"><p class="mono tag">Outreach</p><h3>Outreach message checker</h3><p>A score and concrete fixes for your first message to a candidate.</p><span class="go" aria-hidden="true">Open →</span></a>
+      <div class="pitch band-ink"><p>Built by Denys, who builds sourcing systems for tech hiring teams.</p><a class="btn btn-primary" href="../../#contact">Get in touch</a></div>
+    </div>
   </section>
 
 </main>
 
 <footer class="foot wrap">
   <p class="mono" id="clock">Kyiv</p>
-  <p class="mono small"><a href="../../?side=day">← Denys Dinkevych</a> · Last updated September 2026</p>
+  <a class="cross" href="../../dj/"><span class="disc" aria-hidden="true"></span>By night I play records as diskevich →</a>
+  <p class="mono">Updated September 2026</p>
 </footer>
 
 <script src="../../site.js" defer></script>

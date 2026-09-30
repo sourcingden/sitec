@@ -1,158 +1,21 @@
 <!doctype html>
-<html lang="en" data-side="night" data-theme="dark">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>diskevich — DJ press kit</title>
-<meta name="description" content="Press kit for diskevich, a Kyiv-based selector and record collector: bio, quotes, gigs, guest mixes for Truancy, Nugs On Board and Breathe Records, press photos and booking.">
-<meta name="author" content="Denys Dinkevych">
-<meta property="og:type" content="website">
-<meta property="og:title" content="diskevich — DJ press kit">
-<meta property="og:description" content="Press kit for diskevich, a Kyiv-based selector and record collector: bio, quotes, gigs, guest mixes for Truancy, Nugs On Board and Breathe Records, press photos and booking.">
-<meta property="og:url" content="https://sourcingden.github.io/sitec/press/">
-<meta property="og:image" content="https://sourcingden.github.io/sitec/press/og-press.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://sourcingden.github.io/sitec/press/og-press.png">
-<link rel="canonical" href="https://sourcingden.github.io/sitec/press/">
-<meta name="theme-color" content="#141414">
-<link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="../apple-touch-icon.png">
-<link rel="manifest" href="../manifest.webmanifest">
-<link rel="preload" href="../assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>diskevich — press kit</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://sourcingden.github.io/sitec/dj/">
+<!-- The press kit moved to /dj/. GitHub Pages has no server redirects, so this page forwards. -->
+<meta http-equiv="refresh" content="0; url=../dj/#press-kit">
+<script>location.replace("../dj/" + (location.hash || "#press-kit"));</script>
 <link rel="stylesheet" href="../styles.css">
 </head>
-<body id="top" class="sub">
-<div class="stars" aria-hidden="true"><div class="stars-layer"></div><div class="stars-layer"></div><div class="stars-layer"></div></div>
-
-<header class="bar">
-  <div class="wrap bar-inner">
-    <a class="me" href="../?side=night" aria-label="Denys Dinkevych — home">
-      <img src="../assets/avatar.webp" width="32" height="32" alt="">
-      <span>Denys Dinkevych</span>
-    </a>
-    <nav class="subnav" aria-label="Site">
-      <a href="../tools/">Tools</a>
-      <a href="../cases/">Cases</a>
-      <a href="../press/" aria-current="page">DJ</a>
-    </nav>
-    <a class="btn btn-primary bar-cta" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Book a set</a>
-  </div>
-</header>
-
-<main id="main" class="wrap">
-
-  <section class="page-head">
-    <p class="eyebrow mono">Press kit</p>
-    <h1>diskevich</h1>
-    <p class="lede"><span data-press="tagline">crafting idiosyncratic rhythmic journeys that challenge the mind while compelling the body to move</span></p>
-    <div class="actions">
-      <a class="btn btn-primary" href="../assets/press/diskevich-press-kit.zip" download>Download press kit (.zip)</a>
-      <a class="btn btn-ghost" href="https://ra.co/dj/diskevich" data-press-link="ra" target="_blank" rel="noopener">Resident Advisor ↗</a>
-      <a class="btn btn-ghost" href="https://www.instagram.com/__diskevich/" data-press-link="instagram" target="_blank" rel="noopener">Instagram ↗</a>
-      <a class="btn btn-ghost" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Book a set</a>
-    </div>
-  </section>
-
-  <section class="block tight">
-    <dl class="facts">
-      <div><dt class="mono">Based in</dt><dd data-press="city">Kyiv, Ukraine</dd></div>
-      <div><dt class="mono">Guest mixes</dt><dd data-press="mixCount">7</dd></div>
-      <div><dt class="mono">SoundCloud plays</dt><dd data-press="plays">50K+</dd></div>
-      <div><dt class="mono">Followers</dt><dd data-press="followers">2.1K</dd></div>
-    </dl>
-  </section>
-
-  <section class="block">
-    <div class="block-head"><p class="eyebrow mono">Bio</p><h2>Ready to paste</h2></div>
-    <div class="press-grid">
-      <div class="press-card"><h3>Short bio <button type="button" class="btn btn-small" data-copy="bio-short">Copy</button></h3><textarea id="bio-short" data-press="bioShort" readonly rows="5" aria-label="Short bio"></textarea></div>
-      <div class="press-card"><h3>Long bio <button type="button" class="btn btn-small" data-copy="bio-long">Copy</button></h3><textarea id="bio-long" data-press="bioLong" readonly rows="8" aria-label="Long bio"></textarea></div>
-    </div>
-  </section>
-
-  <section class="block">
-    <div class="block-head"><p class="eyebrow mono">Sound</p><h2>Obscure dancefloor heaters, dug up</h2><p data-press="sound"></p></div>
-    <p class="mono" data-press-block="genres"><span data-press="genres"></span></p>
-    <p class="mono" data-press-block="bpm">BPM: <span data-press="bpm"></span></p>
-  </section>
-
-  <section class="block" data-press-block="gigs">
-    <div class="block-head"><p class="eyebrow mono">Live</p><h2>Gigs</h2><p>Latest dates from Resident Advisor.</p></div>
-    <ol class="mixlist gigs" id="press-gigs"></ol>
-    <p class="more"><a class="btn btn-ghost btn-small" href="https://ra.co/dj/diskevich" data-press-link="ra" target="_blank" rel="noopener">All gigs on Resident Advisor ↗</a></p>
-  </section>
-
-  <section class="block">
-    <div class="block-head"><p class="eyebrow mono">What they say</p><h2>Quotes</h2></div>
-    <ul class="quotes" id="press-quotes"></ul>
-  </section>
-
-  <section class="block">
-    <div class="block-head"><p class="eyebrow mono">Listen</p><h2>Selected guest mixes</h2></div>
-    <ol class="mixlist" id="press-mixes"></ol>
-  </section>
-
-  <section class="block" data-press-block="press">
-    <div class="block-head"><p class="eyebrow mono">Press</p><h2>Interviews &amp; features</h2></div>
-    <ol class="mixlist" id="press-coverage"></ol>
-  </section>
-
-  <section class="block" data-press-block="rider">
-    <div class="block-head"><p class="eyebrow mono">Tech</p><h2>Rider</h2></div>
-    <ul class="bullets" id="press-rider"></ul>
-  </section>
-
-  <section class="block" data-press-block="instagramPosts">
-    <div class="block-head"><p class="eyebrow mono">Instagram</p><h2>From @__diskevich</h2></div>
-    <ul class="insta-posts" id="insta-posts" hidden></ul>
-  </section>
-
-  <section class="block">
-    <div class="block-head"><p class="eyebrow mono">Photos</p><h2>Press photos</h2><p>Free to use for promoting diskevich's gigs and mixes. Credit: Denys Dinkevych. All five are in the .zip too.</p></div>
-    <div class="gallery">
-      <figure class="">
-        <img src="../assets/press/photos/diskevich-01-web.webp" width="900" height="600" alt="diskevich smiling in dark sunglasses in a photo studio, bright flash behind" loading="lazy">
-        <figcaption><span>Smiling in sunglasses, studio flash · 1280×854</span><a class="btn btn-small" href="../assets/press/photos/diskevich-01.jpg" download aria-label="Download photo 1: Smiling in sunglasses, studio flash">Download</a></figcaption>
-      </figure>
-      <figure class="">
-        <img src="../assets/press/photos/diskevich-02-web.webp" width="900" height="596" alt="diskevich in sunglasses against a wall lit in soft pink and blue" loading="lazy">
-        <figcaption><span>Sunglasses, pink light · 1280×847</span><a class="btn btn-small" href="../assets/press/photos/diskevich-02.jpg" download aria-label="Download photo 2: Sunglasses, pink light">Download</a></figcaption>
-      </figure>
-      <figure class="tall">
-        <img src="../assets/press/photos/diskevich-03-web.webp" width="596" height="900" alt="Full-length portrait of diskevich in sunglasses and an &#x27;I&#x27;m exploring&#x27; T-shirt" loading="lazy">
-        <figcaption><span>Full length, portrait · 847×1280</span><a class="btn btn-small" href="../assets/press/photos/diskevich-03.jpg" download aria-label="Download photo 3: Full length, portrait">Download</a></figcaption>
-      </figure>
-      <figure class="">
-        <img src="../assets/press/photos/diskevich-04-web.webp" width="900" height="600" alt="diskevich in red light next to a door covered in stickers" loading="lazy">
-        <figcaption><span>Red light, sticker door · 1280×854</span><a class="btn btn-small" href="../assets/press/photos/diskevich-04.jpg" download aria-label="Download photo 4: Red light, sticker door">Download</a></figcaption>
-      </figure>
-      <figure class="">
-        <img src="../assets/press/photos/diskevich-05-web.webp" width="900" height="600" alt="Black-and-white portrait of diskevich talking at a microphone" loading="lazy">
-        <figcaption><span>Black and white, at the mic · 1280×854</span><a class="btn btn-small" href="../assets/press/photos/diskevich-05.jpg" download aria-label="Download photo 5: Black and white, at the mic">Download</a></figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section class="block contact">
-    <h2>Booking &amp; promo</h2>
-    <p class="contact-note">Club nights, guest mixes, podcasts — send the date, the city and the room.</p>
-    <div class="actions">
-      <a class="btn btn-primary btn-big" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Telegram · sourcingdenis.t.me</a>
-      <a class="btn btn-ghost" href="https://ra.co/dj/diskevich" data-press-link="ra" target="_blank" rel="noopener">Resident Advisor ↗</a>
-      <a class="btn btn-ghost" href="https://www.instagram.com/__diskevich/" data-press-link="instagram" target="_blank" rel="noopener">Instagram ↗</a>
-      <a class="btn btn-ghost" href="https://soundcloud.com/diskevich" target="_blank" rel="noopener">SoundCloud ↗</a>
-    </div>
-  </section>
-
+<body>
+<main class="wrap nf">
+  <h1>The press kit moved.</h1>
+  <p class="lede">It now lives on the diskevich page.</p>
+  <div class="actions"><a class="btn btn-accent" href="../dj/#press-kit">Open the press kit →</a></div>
 </main>
-
-<footer class="foot wrap">
-  <p class="mono" id="clock">Kyiv</p>
-  <p class="mono small"><a href="../?side=night">← Denys Dinkevych</a> · Last updated September 2026</p>
-</footer>
-
-<script src="../site.js" defer></script>
-<script src="../press.js" defer></script>
 </body>
 </html>

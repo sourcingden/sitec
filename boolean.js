@@ -98,7 +98,32 @@
     }
   }
 
-  form.addEventListener("input", update);
+  // The full builder keeps its fields in the URL, so a search can be shared as a link
+  const FIELDS = ["titles", "skills", "exclude", "location"];
+  const urlState = form.hasAttribute("data-url-state");
+  if (urlState) {
+    const params = new URLSearchParams(location.search);
+    if (FIELDS.some((k) => params.has(k))) {
+      for (const k of FIELDS) if (form.elements[k]) form.elements[k].value = params.get(k) || "";
+    }
+  }
+  function saveUrl() {
+    if (!urlState) return;
+    const params = new URLSearchParams();
+    for (const k of FIELDS) { const v = form.elements[k] && form.elements[k].value.trim(); if (v) params.set(k, v); }
+    try { history.replaceState(null, "", location.pathname + (params.toString() ? "?" + params : "") + location.hash); } catch (e) {}
+  }
+
+  // Example chips fill the whole form in one click
+  for (const b of document.querySelectorAll("[data-preset]")) {
+    b.addEventListener("click", () => {
+      const preset = JSON.parse(b.dataset.preset);
+      for (const k of FIELDS) if (form.elements[k]) form.elements[k].value = preset[k] || "";
+      update(); saveUrl();
+    });
+  }
+
+  form.addEventListener("input", () => { update(); saveUrl(); });
   form.addEventListener("submit", (e) => e.preventDefault());
   update();
 })(typeof window !== "undefined" ? window : globalThis);

@@ -1,35 +1,30 @@
 <!doctype html>
-<html lang="en" data-side="day" data-theme="light">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+  // Old links to the DJ side (?side=night) now live at /dj/
+  (function () {
+    try { if (new URLSearchParams(location.search).get("side") === "night") location.replace("dj/" + location.hash); } catch (e) {}
+    document.documentElement.classList.add("js");
+  })();
+</script>
 <title>Denys Dinkevych — Talent Sourcing Lead</title>
-<meta name="description" content="Denys Dinkevych builds sourcing infrastructure: AI sourcing tools, ATS analytics and metrics for tech hiring. By night he DJs as diskevich.">
+<meta name="description" content="Denys Dinkevych builds sourcing systems for tech hiring: AI sourcing tools, ATS analytics and metrics you can defend. Free Boolean, email and outreach tools inside.">
 <meta name="author" content="Denys Dinkevych">
 <meta property="og:type" content="profile">
-<meta property="og:title" content="Denys Dinkevych — sourcing by day, DJ by night">
-<meta property="og:description" content="I build sourcing infrastructure — not just pipelines. By night: diskevich.">
+<meta property="og:title" content="Denys Dinkevych — Talent Sourcing Lead">
+<meta property="og:description" content="Sourcing systems that make tech hiring measurable. Free tools for sourcers inside.">
 <meta property="og:url" content="https://sourcingden.github.io/sitec/">
 <meta property="og:image" content="https://sourcingden.github.io/sitec/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://sourcingden.github.io/sitec/og.png">
 <link rel="canonical" href="https://sourcingden.github.io/sitec/">
-<meta name="theme-color" content="#f4f1e9">
+<meta name="theme-color" content="#f6f6f3">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
-<script>
-  // Pick the side before first paint: ?side= in the URL, then the last choice, then day
-  (function () {
-    var s = null;
-    try { s = new URLSearchParams(location.search).get("side"); } catch (e) {}
-    if (s !== "day" && s !== "night") { try { s = localStorage.getItem("side"); } catch (e) {} }
-    if (s !== "day" && s !== "night") s = "day";
-    var r = document.documentElement;
-    r.dataset.side = s;
-    r.dataset.theme = s === "night" ? "dark" : "light";
-  })();
-</script>
 <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
@@ -41,245 +36,212 @@
   "alternateName": ["sourcingdenis", "diskevich"],
   "jobTitle": "Talent Sourcing Lead",
   "image": "https://sourcingden.github.io/sitec/assets/avatar.webp",
-  "address": { "@type": "PostalAddress", "addressCountry": "UA" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Kyiv", "addressCountry": "UA" },
   "knowsLanguage": ["en", "uk", "ru"],
   "url": "https://sourcingden.github.io/sitec/",
   "sameAs": [
     "https://linkedin.com/in/sourcingdenis",
-    "https://soundcloud.com/diskevich",
-    "https://ra.co/dj/diskevich",
-    "https://www.instagram.com/__diskevich/",
-    "https://t.me/sourcingdenis"
+    "https://sourcingdenis.medium.com/",
+    "https://t.me/sourcingdenis",
+    "https://sourcingden.github.io/sitec/dj/"
   ]
 }
 </script>
 </head>
 <body id="top">
-<div class="stars" aria-hidden="true">
-  <div class="stars-layer" data-speed="0.02"></div>
-  <div class="stars-layer" data-speed="0.05"></div>
-  <div class="stars-layer" data-speed="0.08"></div>
-</div>
+<a class="skip" href="#main">Skip to content</a>
 
 <header class="bar">
   <div class="wrap bar-inner">
-    <a class="me" href="#top" aria-label="Denys Dinkevych — back to top">
-      <img src="assets/avatar.webp" width="32" height="32" alt="">
-      <span>Denys Dinkevych</span>
+    <a class="brand" href="./" aria-label="Denys Dinkevych — home">
+      <img src="assets/avatar.webp" width="34" height="34" alt="">
+      <span class="brand-name">Denys Dinkevych<small class="mono">Talent Sourcing Lead</small></span>
     </a>
-    <div class="switch" role="tablist" aria-label="Choose a side">
-      <button type="button" role="tab" data-side="day" aria-controls="main" aria-selected="true">Sourcing</button>
-      <button type="button" role="tab" data-side="night" aria-controls="main" aria-selected="false" tabindex="-1">DJ</button>
-    </div>
-    <a class="btn btn-primary bar-cta" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">
-      <span data-only="day">Message on Telegram</span><span data-only="night">Book a set</span>
-    </a>
+    <nav class="nav" id="nav" aria-label="Site">
+      <a href="tools/">Tools</a>
+      <a href="cases/">Cases</a>
+      <a href="#experience">Experience</a>
+      <a href="cv/">CV</a>
+      <a class="nav-cross" href="dj/">diskevich</a>
+    </nav>
+    <a class="btn btn-primary bar-cta" href="#contact"><span class="long">Get in touch</span><span class="short">Contact</span></a>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
   </div>
 </header>
 
-<main id="main" class="wrap">
+<main id="main">
   <!-- ============ HERO ============ -->
-  <section class="hero">
+  <section class="hero wrap">
     <div class="hero-text">
-      <p class="eyebrow mono" data-only="day">Talent Sourcing Lead · Ukraine</p>
-      <p class="eyebrow mono" data-only="night">diskevich · DJ · selector &amp; record collector · Kyiv</p>
-
-      <h1 data-only="day">I build sourcing infrastructure — not just pipelines.</h1>
-      <h1 data-only="night">diskevich, after hours.</h1>
-
-      <p class="lede" data-only="day">12 years in tech hiring. I turn search into systems — AI sourcing tools, ATS analytics and metrics that make hiring decisions defensible — and still write the outreach people actually reply to.</p>
-      <p class="lede" data-only="night">Denys by day, <strong>diskevich</strong> by night. Guest mixes for Truancy, Nugs On Board, Breathe Records and more — listen below, or book a set.</p>
-
-      <div class="actions" data-only="day">
-        <a class="btn btn-primary" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Message on Telegram</a>
-        <a class="btn btn-ghost" href="tools/boolean/">Try the Boolean builder →</a>
-      </div>
-      <div class="actions" data-only="night">
-        <a class="btn btn-primary" href="#mixes" data-play>▶ Play the mixes</a>
-        <a class="btn btn-ghost" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Book a set</a>
+      <p class="kicker mono"><span>Talent Sourcing Lead</span><span>12 years in tech hiring</span><span>Kyiv</span></p>
+      <h1>Sourcing systems that make tech hiring <em>measurable.</em></h1>
+      <p class="lede">I turn search into systems — AI sourcing tools, ATS analytics and metrics that make hiring decisions defensible — and still write the outreach people actually reply to.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#contact">Get in touch</a>
+        <a class="btn btn-ghost" href="#tools">Try a free tool ↓</a>
       </div>
     </div>
-
     <figure class="art">
       <canvas class="dots" id="engraving" tabindex="0" role="img"
-        data-images='{"day":{"src":"assets/portrait.webp","mid":145,"spread":45},"night":{"src":"assets/vinyl.webp","mid":150,"spread":34,"spin":200}}'
-        aria-label="Interactive dot picture: a portrait of Denys by day, a spinning vinyl record by night. Move over it to scatter the dots, tap to rebuild."></canvas>
-      <img class="art-fallback" src="assets/portrait.webp" width="700" height="564" alt="Portrait of Denys Dinkevych">
-      <figcaption class="mono">
-        <span data-only="day">Portrait in dots</span><span data-only="night">diskevich · 33⅓ rpm</span>
-        · <span class="hint">move to scatter · tap to rebuild</span>
-      </figcaption>
+        data-images='{"day":{"src":"assets/portrait-hero.webp","mid":145,"spread":45}}'
+        aria-label="Portrait of Denys drawn in dots. Move over it to scatter the dots, tap to rebuild."></canvas>
+      <img class="art-fallback" src="assets/portrait-hero.webp" width="488" height="564" alt="Portrait of Denys Dinkevych">
     </figure>
   </section>
 
   <!-- ============ PROOF ============ -->
-  <section class="proof" data-only="day" aria-label="Track record in numbers">
+  <section class="wrap" aria-label="Track record">
+    <div class="logos">
+      <span class="mono">Previously at</span>
+      <ul><li>iDeals</li><li>Spendesk</li><li>Playson</li><li>Preply</li></ul>
+    </div>
     <ul class="stats">
-      <li><b class="mono">12 yrs</b><span>in tech hiring</span></li>
-      <li><b class="mono">15→48%</b><span>outreach reply rate</span></li>
-      <li><b class="mono">5,000+</b><span>companies mapped</span></li>
-      <li><b class="mono">30→90%</b><span>email discoverability</span></li>
+      <li><b>15<i>→</i>48%</b><span>Outreach reply rate</span><small class="mono">iDeals · 2018–2021</small></li>
+      <li><b>30<i>→</i>90%</b><span>Email discoverability</span><small class="mono">iDeals · 2018–2021</small></li>
+      <li><b>5,000+</b><span>Tech companies mapped</span><small class="mono">Spendesk · DE, FR, UK</small></li>
+      <li><b>6</b><span>Workshops for an ATS switch</span><small class="mono">Playson · Recruitee → Ashby</small></li>
     </ul>
-    <p class="prev mono">Previously at iDeals · Spendesk · Playson · Preply</p>
-  </section>
-  <section class="proof" data-only="night" aria-label="Mixes for">
-    <p class="credits"><span class="mono">Mixes for</span> Truancy · Nugs On Board · X-Kalay · Breathe Records · tresydos · LOWMONEYMUSICLOVE · Kalahari Oyster Cult</p>
-    <p class="prev mono"><span data-press="plays">50K+</span> plays across guest mixes · <span data-press="followers">2.1K</span> followers on SoundCloud</p>
   </section>
 
-  <!-- ============ DAY ============ -->
-  <section id="tools" class="block" data-only="day">
-    <div class="block-head">
-      <p class="eyebrow mono">Free tools</p>
-      <h2>Small tools for sourcers</h2>
-      <p>Things I use every week, rebuilt as free pages. They run in your browser; nothing is sent anywhere.</p>
-    </div>
-    <div class="tool-grid flush">
-      <a class="tool-card" href="tools/boolean/"><p class="mono tag">Search</p><h3>Boolean &amp; X-ray builder</h3><p>LinkedIn, Google X-ray, GitHub and Stack Overflow strings from one form.</p><span class="go" aria-hidden="true">Open →</span></a>
-      <a class="tool-card" href="tools/email-patterns/"><p class="mono tag">Contact</p><h3>Email pattern generator</h3><p>Name + domain → the 12 most common corporate email formats.</p><span class="go" aria-hidden="true">Open →</span></a>
-      <a class="tool-card" href="tools/outreach-check/"><p class="mono tag">Outreach</p><h3>Outreach message checker</h3><p>A score and concrete fixes for your first message to a candidate.</p><span class="go" aria-hidden="true">Open →</span></a>
+  <!-- ============ TOOLS (live) ============ -->
+  <section id="tools" class="band band-ink">
+    <div class="wrap band-grid">
+      <div class="band-intro">
+        <h2>Free tools for sourcers</h2>
+        <p>Things I use every week, rebuilt as free pages. Try the Boolean builder right here — it runs in your browser and nothing is sent anywhere.</p>
+        <ul class="tool-links">
+          <li><a href="tools/boolean/"><b>Boolean &amp; X-ray builder</b><span>LinkedIn, Google X-ray, GitHub and Stack Overflow</span><i aria-hidden="true">→</i></a></li>
+          <li><a href="tools/email-patterns/"><b>Email pattern generator</b><span>Name + domain → the 12 most common formats</span><i aria-hidden="true">→</i></a></li>
+          <li><a href="tools/outreach-check/"><b>Outreach message checker</b><span>A score and concrete fixes for a first message</span><i aria-hidden="true">→</i></a></li>
+        </ul>
+      </div>
+      <div class="demo-card">
+        <form class="bool" id="bool-form" autocomplete="off">
+          <label>Job titles <small>comma-separated, any of</small>
+            <input name="titles" value="Senior Backend Engineer, Backend Developer"></label>
+          <label>Must-have skills <small>all of</small>
+            <input name="skills" value="Go, Kubernetes"></label>
+          <input type="hidden" name="exclude" value="recruiter, intern">
+        </form>
+        <div class="bool-out">
+          <div class="out-card">
+            <div class="out-head"><span class="mono">LinkedIn search</span><span class="out-btns"><button type="button" class="btn btn-small" data-copy="out-linkedin">Copy</button></span></div>
+            <code id="out-linkedin" data-out="linkedin"></code>
+          </div>
+          <div class="out-card">
+            <div class="out-head"><span class="mono">Google X-ray · LinkedIn profiles</span><span class="out-btns"><a class="btn btn-small" data-open="xray" href="#" target="_blank" rel="noopener">Google ↗</a><button type="button" class="btn btn-small" data-copy="out-xray">Copy</button></span></div>
+            <code id="out-xray" data-out="xray"></code>
+          </div>
+        </div>
+        <div class="demo-foot">
+          <span class="mono">Excludes recruiter, intern · GitHub &amp; Stack Overflow in the full version</span>
+          <a class="link-arrow" href="tools/boolean/">Open the full builder →</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="methods" class="block" data-only="day">
-    <div class="block-head">
-      <p class="eyebrow mono">Methods</p>
+  <!-- ============ CASES ============ -->
+  <section id="cases" class="sec wrap">
+    <div class="sec-head">
+      <h2>Case studies</h2>
+      <p>Problem → what I did → result, each with an interactive demo dashboard. The numbers there are invented: real hiring data stays private.</p>
+    </div>
+    <a class="case-feature" href="cases/#funnel-case">
+      <div>
+        <p class="case-num mono">01 · Metrics</p>
+        <h3>A funnel you can defend</h3>
+        <dl>
+          <div><dt class="mono">Problem</dt><dd>Screens were counted differently by different people, so conversion couldn't be compared — or trusted.</dd></div>
+          <div><dt class="mono">Result</dt><dd>One funnel everyone reads the same way, per-sourcer conversion on live dashboards.</dd></div>
+        </dl>
+        <span class="link-arrow">Read the case →</span>
+      </div>
+      <div class="mini-funnel" aria-hidden="true">
+        <span class="demo mono">Demo data</span>
+        <div class="mf-row"><span>Outreach</span><i class="mf-bar" style="--w:100%"></i><b>1,610</b></div>
+        <div class="mf-row"><span>Replies</span><i class="mf-bar" style="--w:34%"></i><b>543</b></div>
+        <div class="mf-row"><span>Screens</span><i class="mf-bar" style="--w:10%"></i><b>163</b></div>
+        <div class="mf-row"><span>Submissions</span><i class="mf-bar" style="--w:4.8%"></i><b>77</b></div>
+        <div class="mf-row"><span>Hires</span><i class="mf-bar" style="--w:1.5%"></i><b>20</b></div>
+      </div>
+    </a>
+    <ul class="case-rows">
+      <li><a href="cases/#bonus-case"><span class="mono">02</span><h3>Bonuses tied to output</h3><p>A bonus model weighted by screens, submissions and hires, with conversion tiers — written down as policy.</p><i aria-hidden="true">→</i></a></li>
+      <li><a href="cases/#migration-case"><span class="mono">03</span><h3>From Recruitee to Ashby</h3><p>An ATS migration with data, a team wiki and six workshops, while the team kept hiring.</p><i aria-hidden="true">→</i></a></li>
+    </ul>
+  </section>
+
+  <!-- ============ METHOD ============ -->
+  <section id="method" class="sec wrap">
+    <div class="sec-head">
       <h2>How I search</h2>
+      <p>Three moves before the first query runs. Most searches fail at the start, not at the string.</p>
     </div>
-    <div class="cards">
-      <article class="card"><p class="mono tag">Method 01</p><h3>Search angles in 60 seconds</h3><p>Three one-line directions before writing a single query — each naming what makes it different: stack, geography or title. Pick one in seconds, expand only that.</p></article>
-      <article class="card"><p class="mono tag">Method 02</p><h3>Non-obvious hypotheses</h3><p>Title swaps, industry pivots, geographic arbitrage, stack-based inference and career-transition patterns — each with its own titles, keywords and donor companies.</p></article>
-      <article class="card"><p class="mono tag">Method 03</p><h3>Market partition</h3><p>Split the addressable pool along independent axes so segments barely overlap and together cover everything. Stop a segment when it stops producing net-new profiles.</p></article>
-      <article class="card"><p class="mono tag">Method 04</p><h3>Outreach that gets replies</h3><p>Personalised from the profile, hooked on the role itself, and a little self-aware about being yet another recruiter message. Reply rate is where outreach is won or lost.</p></article>
-      <article class="card"><p class="mono tag">Method 05</p><h3>Metrics you can defend</h3><p>Count the right thing first: screens, submissions and conversion per sourcer, with bonuses tied to real output. You can't improve what you're measuring wrong.</p></article>
-      <article class="card"><p class="mono tag">Method 06</p><h3>Job posts without fluff</h3><p>Lead with the real challenge, be straight about what's hard, cut the buzzwords. A good post filters as much as it attracts.</p></article>
-    </div>
-  </section>
-
-  <section id="cases" class="block" data-only="day">
-    <div class="block-head">
-      <p class="eyebrow mono">Case studies</p>
-      <h2>Problem → what I did → result</h2>
-      <p>With interactive demo dashboards (invented numbers — real hiring data stays private).</p>
-    </div>
-    <div class="tool-grid flush">
-      <a class="tool-card" href="cases/#funnel-case"><p class="mono tag">Metrics</p><h3>A funnel you can defend</h3><p>Rebuilt how screens and submissions are counted, then put per-sourcer conversion on live dashboards.</p><span class="go" aria-hidden="true">Read the case →</span></a>
-      <a class="tool-card" href="cases/#bonus-case"><p class="mono tag">Incentives</p><h3>Bonuses tied to output</h3><p>A bonus model weighted by screens, submissions and hires, with conversion tiers.</p><span class="go" aria-hidden="true">Read the case →</span></a>
-      <a class="tool-card" href="cases/#migration-case"><p class="mono tag">Systems</p><h3>From Recruitee to Ashby</h3><p>An ATS migration with data, wiki and six workshops for the TA team.</p><span class="go" aria-hidden="true">Read the case →</span></a>
+    <ol class="process">
+      <li data-n="01"><h3>Search angles in 60 seconds</h3><p>Three one-line directions before writing a single query — each naming what makes it different: stack, geography or title. Pick one in seconds, expand only that.</p></li>
+      <li data-n="02"><h3>Non-obvious hypotheses</h3><p>Title swaps, industry pivots, geographic arbitrage, stack-based inference and career-transition patterns — each with its own titles, keywords and donor companies.</p></li>
+      <li data-n="03"><h3>Market partition</h3><p>Split the addressable pool along independent axes so segments barely overlap and together cover everything. Stop a segment when it stops producing net-new profiles.</p></li>
+    </ol>
+    <div class="after">
+      <p class="mono">And after the search</p>
+      <div><h3>Outreach that gets replies</h3><p>Personalised from the profile, hooked on the role, a little self-aware.</p><a href="tools/outreach-check/">Check a message →</a></div>
+      <div><h3>Metrics you can defend</h3><p>Screens, submissions and conversion per sourcer, with bonuses tied to real output.</p><a href="cases/#funnel-case">See the funnel →</a></div>
+      <div><h3>Job posts without fluff</h3><p>Lead with the real challenge, be straight about what's hard. A good post filters as much as it attracts.</p></div>
     </div>
   </section>
 
-  <section id="record" class="block" data-only="day">
-    <div class="block-head">
-      <p class="eyebrow mono">Track record</p>
-      <h2>What I've built</h2>
+  <!-- ============ EXPERIENCE ============ -->
+  <section id="experience" class="sec wrap">
+    <div class="sec-head">
+      <h2>Experience</h2>
+      <div class="actions"><a class="btn btn-ghost" href="cv/">Open the one-page CV →</a></div>
     </div>
     <ol class="timeline">
-      <li><p class="mono when">2026 — now</p><div><h3>Talent Sourcing Lead</h3><p>Lead a 5-person sourcing team for dedicated R&amp;D client teams. Built an output-based bonus model, an analytics stack on Ashby (a custom MCP server plus live dashboards) and a library of AI sourcing tools that cut prep time across the team.</p></div></li>
-      <li><p class="mono when">2023 — 2026</p><div><h3>Senior Talent Sourcer · Playson</h3><p>Led the migration from Recruitee to Ashby, wrote the team wiki, ran six workshops for the TA team and automated reporting.</p></div></li>
-      <li><p class="mono when">2021 — 2023</p><div><h3>Global Talent Sourcer · Spendesk</h3><p>Mapped 5,000+ tech companies across Germany, France and the UK; built hiring dashboards in Gem; recorded 50+ training videos; led the job-description revamp.</p></div></li>
-      <li><p class="mono when">2018 — 2021</p><div><h3>Talent Sourcing Lead · iDeals</h3><p>Built the company's first in-house sourcing function and team, rolled out Lever and Gem, and lifted reply rate from 15% to 48% and email discoverability from 30% to 90%.</p></div></li>
-      <li><p class="mono when">2014 — 2018</p><div><h3>Sourcing &amp; recruiting · Preply, Attendify and agencies</h3><p>Full-cycle and engineering sourcing; 13 hires personally sourced at Preply.</p></div></li>
+      <li><p class="mono when">2026 — now</p><h3>Talent Sourcing Lead<span>Dedicated R&amp;D teams</span></h3><p>Lead a 5-person sourcing team for dedicated R&amp;D client teams. Built an output-based bonus model, an analytics stack on Ashby (a custom MCP server plus live dashboards) and a library of AI sourcing tools that cut prep time across the team.</p></li>
+      <li><p class="mono when">2023 — 2026</p><h3>Senior Talent Sourcer<span>Playson</span></h3><p>Led the migration from Recruitee to Ashby, wrote the team wiki, ran six workshops for the TA team and automated reporting.</p></li>
+      <li><p class="mono when">2021 — 2023</p><h3>Global Talent Sourcer<span>Spendesk</span></h3><p>Mapped 5,000+ tech companies across Germany, France and the UK; built hiring dashboards in Gem; recorded 50+ training videos; led the job-description revamp.</p></li>
+      <li><p class="mono when">2018 — 2021</p><h3>Talent Sourcing Lead<span>iDeals</span></h3><p>Built the company's first in-house sourcing function and team, rolled out Lever and Gem, and lifted reply rate from 15% to 48% and email discoverability from 30% to 90%.</p></li>
+      <li><p class="mono when">2014 — 2018</p><h3>Sourcing &amp; recruiting<span>Preply, Attendify and agencies</span></h3><p>Full-cycle and engineering sourcing; 13 hires personally sourced at Preply.</p></li>
     </ol>
   </section>
 
-  <section id="writing" class="block" data-only="day">
-    <div class="block-head">
-      <p class="eyebrow mono">Writing &amp; recognition</p>
-      <h2>Shared with the community</h2>
+  <!-- ============ WRITING ============ -->
+  <section id="writing" class="sec wrap">
+    <div class="sec-head">
+      <h2>Writing &amp; recognition</h2>
+      <div class="actions"><a class="btn btn-ghost" href="https://sourcingdenis.medium.com/" target="_blank" rel="noopener">More on Medium ↗</a></div>
     </div>
-    <ul class="plain">
-      <li><h3>The Ultimate Cheat Sheet on Finding Great Engineers on Stack Overflow</h3><p class="mono">Publication</p></li>
-      <li><h3>10 Must-Have Google Sheets Add-ons for Sourcers and Recruiters</h3><p class="mono">Publication</p></li>
-      <li><h3>Bull Sessions with Tech Recruiters</h3><p class="mono">Publication</p></li>
-      <li><h3>Response Wranglers</h3><p class="mono">Award</p></li>
-      <li><h3>Talent Sourcing · Licensed Tech Recruiter</h3><p class="mono">Certifications</p></li>
+    <ul class="pubs">
+      <li><a href="https://medium.com/42hire-don-t-panic-just-hire/how-to-find-developers-at-stackoverflow-aa0f64dcffd1" target="_blank" rel="noopener"><b>The Ultimate Cheat Sheet on Finding Great Engineers on Stack Overflow</b><span class="mono">Medium · 42hire</span></a></li>
+      <li><a href="https://www.sourcecon.com/articles/10-must-have-google-sheets-add-ons-for-sourcers-and-recruiters" target="_blank" rel="noopener"><b>10 Must-Have Google Sheets Add-ons for Sourcers and Recruiters</b><span class="mono">SourceCon</span></a></li>
+      <li><a href="https://blog.glossarytech.com/bull-sessions-with-tech-recruiters-denis-dinkevich-ccf40a4fa66d" target="_blank" rel="noopener"><b>Bull Sessions with Tech Recruiters</b><span class="mono">GlossaryTech · interview</span></a></li>
+      <li><div class="row"><b>Response Wranglers</b><span class="mono">Award</span></div></li>
+      <li><div class="row"><b>Talent Sourcing · Licensed Tech Recruiter</b><span class="mono">Certifications</span></div></li>
     </ul>
-  </section>
-
-  <!-- ============ NIGHT ============ -->
-  <section id="mixes" class="block" data-only="night">
-    <div class="block-head">
-      <p class="eyebrow mono">Listen</p>
-      <h2>mixes spotlight</h2>
-      <p>A playlist of guest mixes and podcasts.</p>
-    </div>
-    <div class="sc-facade" id="sc-facade">
-      <button type="button" class="sc-play" id="sc-load" aria-label="Load and play the mixes spotlight playlist"><span aria-hidden="true">▶</span></button>
-      <div>
-        <p class="sc-title">mixes spotlight · diskevich</p>
-        <p class="sc-note mono">Loads SoundCloud's player (third-party) right here.</p>
-      </div>
-    </div>
-    <ol class="mixlist" id="press-mixes">
-      <li><a href="https://soundcloud.com/diskevich/sets/mixes-highlight" target="_blank" rel="noopener"><span>Nugs On Board</span><em>Nugcast #19</em></a></li>
-      <li><a href="https://soundcloud.com/diskevich/sets/mixes-highlight" target="_blank" rel="noopener"><span>X-Kalay</span><em>XKM007</em></a></li>
-      <li><a href="https://soundcloud.com/diskevich/sets/mixes-highlight" target="_blank" rel="noopener"><span>LOWMONEYMUSICLOVE</span><em>Guest mix</em></a></li>
-      <li><a href="https://soundcloud.com/diskevich/sets/mixes-highlight" target="_blank" rel="noopener"><span>Kalahari Oyster Cult</span><em>The Sizeable Mix</em></a></li>
-      <li><a href="https://soundcloud.com/diskevich/sets/mixes-highlight" target="_blank" rel="noopener"><span>tresydos</span><em>018</em></a></li>
-      <li><a href="https://soundcloud.com/diskevich/sets/mixes-highlight" target="_blank" rel="noopener"><span>TRUANTS</span><em>Truancy Volume 320</em></a></li>
-      <li><a href="https://soundcloud.com/diskevich/sets/mixes-highlight" target="_blank" rel="noopener"><span>Breathe Records</span><em>Breathecast 022</em></a></li>
-    </ol>
-  </section>
-
-  <section id="sound" class="block" data-only="night">
-    <div class="block-head">
-      <p class="eyebrow mono">Sound</p>
-      <h2>Obscure dancefloor heaters, dug up</h2>
-      <p data-press="sound">Golden-era tech house, chuggy house and obscure dancefloor digs, shaped by 90s US house, Detroit techno and minimal house.</p>
-    </div>
-    <ul class="quotes" id="press-quotes">
-      <li><blockquote>“When it comes to unearthing some of the most obscure dancefloor heaters in the world, diskevich is one of the hardest-working DJs in music right now.”</blockquote><a class="mono" href="https://truantsblog.com/2023/truancy-volume-320-diskevich/" target="_blank" rel="noopener">— Truants ↗</a></li>
-      <li><blockquote>“One of the best Ukrainian selectors.”</blockquote><a class="mono" href="https://soundcloud.com/nugsonboardlabel/nugcast-19-diskevich" target="_blank" rel="noopener">— Nugs On Board ↗</a></li>
-    </ul>
-    <h3 class="sub-h">Gigs <span class="mono">from Resident Advisor</span></h3>
-    <ol class="mixlist gigs" id="home-gigs">
-      <li><a href="https://ra.co/events/2502467" target="_blank" rel="noopener"><span>ÓПІК</span><em>Closer · Kyiv</em><small class="mono">3 Oct 2026</small></a></li>
-      <li><a href="https://ra.co/events/2535892" target="_blank" rel="noopener"><span>Rancho BBQ x TOP4UH</span><em>BRUKXT · Kyiv</em><small class="mono">13 Sept 2026</small></a></li>
-    </ol>
-    <div class="actions">
-      <a class="btn btn-primary" href="press/">Open the press kit →</a>
-      <a class="btn btn-ghost" href="https://ra.co/dj/diskevich" data-press-link="ra" target="_blank" rel="noopener">Resident Advisor ↗</a>
-      <a class="btn btn-ghost" href="https://truantsblog.com/2023/truancy-volume-320-diskevich/" target="_blank" rel="noopener">Read the Truants interview ↗</a>
-    </div>
-  </section>
-
-  <section id="instagram" class="block" data-only="night">
-    <div class="insta-card">
-      <img src="assets/press/photos/diskevich-02-web.webp" width="96" height="96" alt="" loading="lazy">
-      <div>
-        <p class="eyebrow mono">Instagram</p>
-        <h2>@__diskevich</h2>
-        <p>Digs, gigs and the rest of the night shift.</p>
-      </div>
-      <a class="btn btn-primary" href="https://www.instagram.com/__diskevich/" data-press-link="instagram" target="_blank" rel="noopener">Follow on Instagram ↗</a>
-    </div>
-    <ul class="insta-posts" id="insta-posts" hidden></ul>
   </section>
 
   <!-- ============ CONTACT ============ -->
-  <section id="contact" class="block contact">
-    <h2 data-only="day">Hiring, or want to swap sourcing notes?</h2>
-    <h2 data-only="night">Booking &amp; promo</h2>
-    <p class="contact-note" data-only="night">Club nights, guest mixes, podcasts — send the date, the city and the room.</p>
-    <div class="actions">
-      <a class="btn btn-primary btn-big" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Telegram · sourcingdenis.t.me</a>
-      <a class="btn btn-ghost" href="https://linkedin.com/in/sourcingdenis" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a class="btn btn-ghost" href="https://soundcloud.com/diskevich" target="_blank" rel="noopener">SoundCloud ↗</a>
-      <a class="btn btn-ghost" href="https://ra.co/dj/diskevich" data-only="night" target="_blank" rel="noopener">Resident Advisor ↗</a>
-      <a class="btn btn-ghost" href="https://www.instagram.com/__diskevich/" data-only="night" target="_blank" rel="noopener">Instagram ↗</a>
+  <section id="contact" class="wrap">
+    <div class="contact-block dotgrid">
+      <h2>Hiring, or want to swap sourcing notes?</h2>
+      <p>Telegram is the fastest way to reach me. LinkedIn works too.</p>
+      <div class="actions">
+        <a class="btn btn-accent btn-big" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Message on Telegram</a>
+        <a class="btn btn-ghost btn-big" href="https://linkedin.com/in/sourcingdenis" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
     </div>
   </section>
 </main>
 
 <footer class="foot wrap">
   <p class="mono" id="clock">Kyiv</p>
-  <p class="mono small">Portrait © Denys Dinkevych · Last updated September 2026</p>
+  <a class="cross" href="dj/"><span class="disc" aria-hidden="true"></span>By night I play records as diskevich →</a>
+  <p class="mono">Portrait © Denys Dinkevych · Updated September 2026</p>
 </footer>
 
 <script src="site.js" defer></script>
-<script src="main.js" defer></script>
+<script src="boolean.js" defer></script>
 <script src="engraving.js" defer></script>
-<script src="press.js" defer></script>
 </body>
 </html>
