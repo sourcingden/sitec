@@ -1,5 +1,17 @@
-// diskevich page: the SoundCloud player. Nothing third-party loads until a click.
+// diskevich page: the YouTube and SoundCloud players. Nothing third-party loads until a click.
 (() => {
+  // YouTube: the button holds a local thumbnail; a click swaps in the no-cookie player
+  const yt = document.querySelector(".yt-play");
+  if (yt) yt.addEventListener("click", () => {
+    const iframe = document.createElement("iframe");
+    iframe.title = yt.getAttribute("aria-label").replace(/^Play video: /, "");
+    iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+    iframe.allowFullscreen = true;
+    iframe.src = `https://www.youtube-nocookie.com/embed/${yt.dataset.video}?autoplay=1&rel=0`;
+    yt.replaceWith(iframe);
+    iframe.focus();
+  });
+
   const box = document.getElementById("sc-facade");
   if (!box) return;
   function loadPlayer() {
