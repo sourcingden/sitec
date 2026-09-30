@@ -34,7 +34,7 @@ Live: **https://sourcingden.github.io/sitec/** (GitHub Pages, static, no build s
 ## Code
 - `styles.css` — one stylesheet: tokens (light for sourcing, dark for diskevich), then components, then breakpoints.
 - `site.js` — shared: mobile menu, clock, copy buttons (`data-copy="<id>"`).
-- `dj/dj.js` — SoundCloud player on `/dj/` (loads only on click).
+- `dj/dj.js` — YouTube and SoundCloud players on `/dj/` (both load only on click; the video shows a local thumbnail from `assets/video/` until then).
 - `boolean.js`, `tools/email-patterns/email.js`, `tools/outreach-check/outreach.js` — pure functions, testable in Node (`require()` them).
 - `cases/cases.js` — demo dashboards. `press.js` — renders `press.json`.
 - Fonts are self-hosted in `assets/fonts/` (SIL Open Font License).

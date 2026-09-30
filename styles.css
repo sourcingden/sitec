@@ -524,6 +524,21 @@ img { max-width: 100%; }
 .credits { font-size: clamp(18px, 2vw, 24px); font-weight: 500; line-height: 1.45; letter-spacing: -0.01em; margin-top: 24px; }
 .credits .mono { font-size: 12.5px; font-weight: 400; color: var(--muted); letter-spacing: .03em; margin-right: 10px; }
 
+/* video: local thumbnail until play */
+.yt-facade { margin: 0 0 clamp(20px, 3vw, 40px); }
+.yt-play, .yt-facade iframe {
+  display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: var(--radius); overflow: hidden;
+  background: var(--panel);
+}
+.yt-play { position: relative; padding: 0; cursor: pointer; }
+.yt-play img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease, opacity .2s; }
+.yt-play .sc-play { position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: grid; place-content: center; box-shadow: 0 10px 40px rgba(0,0,0,.45); }
+.yt-cap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 20px; margin-top: 12px; }
+.yt-cap > span { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+.yt-cap b { font-weight: 600; font-size: 18px; letter-spacing: -0.01em; }
+.yt-cap .mono { font-size: 12.5px; color: var(--muted); }
+.yt-cap a { color: var(--accent); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+
 /* player */
 .listen { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: start; }
 .sc-facade {
@@ -647,6 +662,8 @@ img { max-width: 100%; }
   .tool-links a:hover b, .case-rows a:hover h3, .pubs a:hover b, .mixlist a:hover span, .gigs-next a:hover span { color: var(--accent); }
   .case-feature:hover { border-color: var(--fg); }
   .sc-play:hover { transform: scale(1.06); }
+  .yt-play:hover img { transform: scale(1.02); opacity: .85; }
+  .yt-play:hover .sc-play { transform: scale(1.06); }
   .cross:hover { border-color: var(--fg); }
 }
 
@@ -718,6 +735,9 @@ img { max-width: 100%; }
   .gallery figure:first-child img { aspect-ratio: 3 / 2; }
   .gallery figcaption { flex-direction: column; align-items: flex-start; }
   .gigs-next a, .gigs-next .row { grid-template-columns: 1fr; padding: 18px; }
+  .yt-play .sc-play { width: 64px; height: 64px; font-size: 24px; }
+  .sc-facade { min-height: 0; flex-direction: row; align-items: center; gap: 18px; }
+  .sc-facade .sc-play { width: 72px; height: 72px; font-size: 26px; }
   .insta-card { grid-template-columns: 64px 1fr; }
   .insta-card img { width: 64px; height: 64px; }
   .insta-card .btn { grid-column: 1 / -1; }
