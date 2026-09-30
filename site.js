@@ -1,4 +1,4 @@
-// Shared by every page: copy-to-clipboard helper and the Kyiv clock in the footer.
+// Shared by every page: copy-to-clipboard helper, the mobile menu and the Kyiv clock in the footer.
 (function () {
   window.copyText = async function (text) {
     try { await navigator.clipboard.writeText(text); return true; } catch (e) {}
@@ -24,6 +24,22 @@
     clearTimeout(btn._t);
     btn._t = setTimeout(() => { btn.textContent = label; btn.classList.remove("copied"); }, 1600);
   });
+
+  // Mobile menu: the nav folds behind a button under 760px
+  const bar = document.querySelector(".bar");
+  const toggle = bar && bar.querySelector(".nav-toggle");
+  if (toggle) {
+    const set = (open) => {
+      bar.classList.toggle("open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.textContent = open ? "Close" : "Menu";
+    };
+    toggle.addEventListener("click", () => set(!bar.classList.contains("open")));
+    bar.addEventListener("click", (e) => { if (e.target.closest(".nav a")) set(false); });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && bar.classList.contains("open")) { set(false); toggle.focus(); }
+    });
+  }
 
   const clock = document.getElementById("clock");
   if (clock) {

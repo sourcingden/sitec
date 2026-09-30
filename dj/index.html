@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>document.documentElement.classList.add("js");</script>
+<title>diskevich — DJ, selector &amp; record collector · Kyiv</title>
+<meta name="description" content="diskevich is a Kyiv-based selector and record collector: guest mixes for Truancy, Nugs On Board and Breathe Records, gigs from Resident Advisor, bio, press photos and booking.">
+<meta name="author" content="Denys Dinkevych">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="diskevich — DJ, selector &amp; record collector · Kyiv">
+<meta property="og:description" content="Obscure dancefloor heaters, dug up. Mixes, gigs, press kit and booking.">
+<meta property="og:url" content="https://sourcingden.github.io/sitec/dj/">
+<meta property="og:image" content="https://sourcingden.github.io/sitec/dj/og-dj.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sourcingden.github.io/sitec/dj/og-dj.png">
+<link rel="canonical" href="https://sourcingden.github.io/sitec/dj/">
+<meta name="theme-color" content="#0c0c0c">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="preload" href="../assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "diskevich",
+  "alternateName": "Denys Dinkevych",
+  "jobTitle": "DJ",
+  "description": "Kyiv-based selector and record collector.",
+  "image": "https://sourcingden.github.io/sitec/assets/press/photos/diskevich-02-web.webp",
+  "address": { "@type": "PostalAddress", "addressLocality": "Kyiv", "addressCountry": "UA" },
+  "url": "https://sourcingden.github.io/sitec/dj/",
+  "sameAs": [
+    "https://soundcloud.com/diskevich",
+    "https://ra.co/dj/diskevich",
+    "https://www.instagram.com/__diskevich/"
+  ]
+}
+</script>
+</head>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+<div class="dj-bg dotgrid" aria-hidden="true"></div>
+
+<header class="bar">
+  <div class="wrap bar-inner">
+    <a class="brand" href="./" aria-label="diskevich — top of the page">
+      <span class="brand-mark">diskevich</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Site">
+      <a href="#listen">Listen</a>
+      <a href="#gigs">Gigs</a>
+      <a href="#press-kit">Press kit</a>
+      <a class="nav-cross" href="../">Denys by day</a>
+    </nav>
+    <a class="btn btn-primary bar-cta" href="https://t.me/sourcingdenis" target="_blank" rel="noopener"><span class="long">Book a set</span><span class="short">Book</span></a>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ============ HERO ============ -->
+  <section class="dj-hero wrap">
+    <p class="kicker mono"><span>DJ</span><span>selector &amp; record collector</span><span data-press="city">Kyiv, Ukraine</span></p>
+    <h1 class="wordmark">diskevich<span>.</span></h1>
+    <div class="dj-hero-grid">
+      <div>
+        <p class="lede" data-press="sound">Golden-era tech house, chuggy house and obscure dancefloor digs, shaped by 90s US house, Detroit techno and minimal house.</p>
+        <div class="actions">
+          <a class="btn btn-accent" href="#listen" data-play>▶ Play the mixes</a>
+          <a class="btn btn-ghost" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Book a set</a>
+          <a class="btn btn-ghost" href="../assets/press/diskevich-press-kit.zip" download>Press kit .zip</a>
+        </div>
+        <p class="credits"><span class="mono">Mixes for</span>Truancy · Nugs On Board · X-Kalay · Breathe Records · tresydos · LOWMONEYMUSICLOVE · Kalahari Oyster Cult</p>
+      </div>
+      <figure class="art">
+        <canvas class="dots" id="engraving" tabindex="0" role="img" style="--ar: 700 / 564"
+          data-images='{"night":{"src":"../assets/vinyl.webp","mid":150,"spread":34,"spin":200}}'
+          aria-label="A vinyl record drawn in dots, spinning at 33⅓ rpm. Move over it to scatter the dots, tap to rebuild."></canvas>
+        <img class="art-fallback" src="../assets/vinyl.webp" width="700" height="564" alt="A vinyl record">
+      </figure>
+    </div>
+    <dl class="facts">
+      <div><dt class="mono">Based in</dt><dd>Kyiv</dd></div>
+      <div><dt class="mono">Guest mixes</dt><dd data-press="mixCount">7</dd></div>
+      <div><dt class="mono">SoundCloud plays</dt><dd data-press="plays">50K+</dd></div>
+      <div><dt class="mono">Followers</dt><dd data-press="followers">2.1K</dd></div>
+    </dl>
+  </section>
+
+  <!-- ============ LISTEN ============ -->
+  <section id="listen" class="sec wrap">
+    <div class="sec-head">
+      <h2>Listen</h2>
+      <p>A playlist of guest mixes and podcasts. The player is SoundCloud's and loads only when you press play.</p>
+    </div>
+    <div class="listen">
+      <div class="sc-facade dotgrid" id="sc-facade">
+        <button type="button" class="sc-play" id="sc-load" aria-label="Load and play the mixes spotlight playlist"><span aria-hidden="true">▶</span></button>
+        <div>
+          <p class="sc-title">Mixes spotlight</p>
+          <p class="sc-note mono">7 guest mixes · SoundCloud player</p>
+        </div>
+      </div>
+      <ol class="mixlist" id="press-mixes">
+        <li><a href="https://soundcloud.com/diskevich/sets/mixes-highlight" target="_blank" rel="noopener"><span>Nugs On Board</span><em>Nugcast #19</em></a></li>
+        <li><a href="https://soundcloud.com/diskevich/sets/mixes-highlight" target="_blank" rel="noopener"><span>tresydos</span><em>018</em></a></li>
+        <li><a href="https://soundcloud.com/diskevich/sets/mixes-highlight" target="_blank" rel="noopener"><span>LOWMONEYMUSICLOVE</span><em>Guest mix</em></a></li>
+        <li><a href="https://soundcloud.com/diskevich/sets/mixes-highlight" target="_blank" rel="noopener"><span>X-Kalay</span><em>XKM007</em></a></li>
+        <li><a href="https://soundcloud.com/diskevich/sets/mixes-highlight" target="_blank" rel="noopener"><span>Truants</span><em>Truancy Volume 320</em></a></li>
+        <li><a href="https://soundcloud.com/diskevich/sets/mixes-highlight" target="_blank" rel="noopener"><span>Kalahari Oyster Cult</span><em>The Sizeable Mix</em></a></li>
+        <li><a href="https://soundcloud.com/diskevich/sets/mixes-highlight" target="_blank" rel="noopener"><span>Breathe Records</span><em>Breathecast 022</em></a></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ GIGS ============ -->
+  <section id="gigs" class="sec wrap" data-press-block="gigs">
+    <div class="sec-head">
+      <h2>Gigs</h2>
+      <div class="actions"><a class="btn btn-ghost" href="https://ra.co/dj/diskevich" data-press-link="ra" target="_blank" rel="noopener">All dates on Resident Advisor ↗</a></div>
+    </div>
+    <ol class="gigs-next" id="gigs-upcoming">
+      <li><a href="https://ra.co/events/2502467" target="_blank" rel="noopener"><span>ÓПІК</span><em>Closer · Kyiv</em><small class="mono">3 Oct 2026</small></a></li>
+    </ol>
+    <p class="gigs-empty" id="gigs-none" hidden>No dates announced right now — booking is open.</p>
+    <details class="past" id="gigs-past-box">
+      <summary>Past gigs</summary>
+      <ol class="mixlist" id="gigs-past"></ol>
+    </details>
+  </section>
+
+  <!-- ============ QUOTES ============ -->
+  <section class="sec wrap">
+    <div class="sec-head"><h2>What they say</h2></div>
+    <ul class="quotes" id="press-quotes">
+      <li><blockquote>“When it comes to unearthing some of the most obscure dancefloor heaters in the world, diskevich is one of the hardest-working DJs in music right now.”</blockquote><a class="mono" href="https://truantsblog.com/2023/truancy-volume-320-diskevich/" target="_blank" rel="noopener">— Truants ↗</a></li>
+      <li><blockquote>“One of the best Ukrainian selectors.”</blockquote><a class="mono" href="https://soundcloud.com/nugsonboardlabel/nugcast-19-diskevich" target="_blank" rel="noopener">— Nugs On Board ↗</a></li>
+    </ul>
+  </section>
+
+  <!-- ============ PRESS KIT ============ -->
+  <section id="press-kit" class="sec wrap">
+    <div class="sec-head">
+      <h2>Press kit</h2>
+      <div class="actions"><a class="btn btn-accent" href="../assets/press/diskevich-press-kit.zip" download>Download everything (.zip)</a></div>
+    </div>
+    <div class="press-grid">
+      <div class="press-card"><h3>Short bio <button type="button" class="btn btn-small" data-copy="bio-short">Copy</button></h3><textarea id="bio-short" data-press="bioShort" readonly rows="5" aria-label="Short bio"></textarea></div>
+      <div class="press-card"><h3>Long bio <button type="button" class="btn btn-small" data-copy="bio-long">Copy</button></h3><textarea id="bio-long" data-press="bioLong" readonly rows="8" aria-label="Long bio"></textarea></div>
+    </div>
+    <p class="mono chips" data-press-block="genres"><span data-press="genres"></span></p>
+    <p class="mono note" data-press-block="bpm">BPM: <span data-press="bpm"></span></p>
+  </section>
+
+  <section class="block wrap">
+    <div class="block-head"><h2>Press photos</h2><p>Free to use for promoting diskevich's gigs and mixes. Credit: Denys Dinkevych. All five are in the .zip too.</p></div>
+    <div class="gallery">
+      <figure>
+        <img src="../assets/press/photos/diskevich-02-web.webp" width="900" height="596" alt="diskevich in sunglasses against a wall lit in soft pink and blue" loading="lazy">
+        <figcaption><span>Sunglasses, pink light · 1280×847</span><a class="btn btn-small" href="../assets/press/photos/diskevich-02.jpg" download aria-label="Download photo: Sunglasses, pink light">Download</a></figcaption>
+      </figure>
+      <figure>
+        <img src="../assets/press/photos/diskevich-01-web.webp" width="900" height="600" alt="diskevich smiling in dark sunglasses in a photo studio, bright flash behind" loading="lazy">
+        <figcaption><span>Studio flash · 1280×854</span><a class="btn btn-small" href="../assets/press/photos/diskevich-01.jpg" download aria-label="Download photo: Smiling in sunglasses, studio flash">Download</a></figcaption>
+      </figure>
+      <figure>
+        <img src="../assets/press/photos/diskevich-03-web.webp" width="596" height="900" alt="Full-length portrait of diskevich in sunglasses and an &#x27;I&#x27;m exploring&#x27; T-shirt" loading="lazy">
+        <figcaption><span>Full length · 847×1280</span><a class="btn btn-small" href="../assets/press/photos/diskevich-03.jpg" download aria-label="Download photo: Full length, portrait">Download</a></figcaption>
+      </figure>
+      <figure>
+        <img src="../assets/press/photos/diskevich-04-web.webp" width="900" height="600" alt="diskevich in red light next to a door covered in stickers" loading="lazy">
+        <figcaption><span>Red light · 1280×854</span><a class="btn btn-small" href="../assets/press/photos/diskevich-04.jpg" download aria-label="Download photo: Red light, sticker door">Download</a></figcaption>
+      </figure>
+      <figure>
+        <img src="../assets/press/photos/diskevich-05-web.webp" width="900" height="600" alt="Black-and-white portrait of diskevich talking at a microphone" loading="lazy">
+        <figcaption><span>At the mic · 1280×854</span><a class="btn btn-small" href="../assets/press/photos/diskevich-05.jpg" download aria-label="Download photo: Black and white, at the mic">Download</a></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="block wrap" data-press-block="press">
+    <div class="block-head"><h2>Interviews &amp; features</h2></div>
+    <ol class="mixlist" id="press-coverage"></ol>
+  </section>
+
+  <section class="block wrap" data-press-block="rider">
+    <div class="block-head"><h2>Rider</h2></div>
+    <ul class="bullets" id="press-rider"></ul>
+  </section>
+
+  <section class="block wrap">
+    <div class="insta-card">
+      <img src="../assets/press/photos/diskevich-02-web.webp" width="88" height="88" alt="" loading="lazy">
+      <div>
+        <h3>@__diskevich</h3>
+        <p>Digs, gigs and the rest of the night shift.</p>
+      </div>
+      <a class="btn btn-primary" href="https://www.instagram.com/__diskevich/" data-press-link="instagram" target="_blank" rel="noopener">Follow on Instagram ↗</a>
+    </div>
+    <ul class="insta-posts" id="insta-posts" hidden></ul>
+  </section>
+
+  <!-- ============ BOOKING ============ -->
+  <section id="booking" class="wrap">
+    <div class="contact-block dotgrid">
+      <h2>Booking &amp; promo</h2>
+      <p>Club nights, guest mixes, podcasts — send the date, the city and the room.</p>
+      <div class="actions">
+        <a class="btn btn-accent btn-big" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Book on Telegram</a>
+        <a class="btn btn-ghost" href="https://ra.co/dj/diskevich" data-press-link="ra" target="_blank" rel="noopener">Resident Advisor ↗</a>
+        <a class="btn btn-ghost" href="https://soundcloud.com/diskevich" target="_blank" rel="noopener">SoundCloud ↗</a>
+        <a class="btn btn-ghost" href="https://www.instagram.com/__diskevich/" data-press-link="instagram" target="_blank" rel="noopener">Instagram ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot wrap">
+  <p class="mono" id="clock">Kyiv</p>
+  <a class="cross to-day" href="../"><span class="disc" aria-hidden="true"></span>By day, Denys builds sourcing systems →</a>
+  <p class="mono">Photos © Denys Dinkevych · Updated September 2026</p>
+</footer>
+
+<script src="../site.js" defer></script>
+<script src="dj.js" defer></script>
+<script src="../engraving.js" defer></script>
+<script src="../press.js" defer></script>
+</body>
+</html>

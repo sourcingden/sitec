@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="en" data-side="day" data-theme="light">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>document.documentElement.classList.add("js");</script>
 <title>Sourcing tools — Denys Dinkevych</title>
 <meta name="description" content="Free, private sourcing tools: a Boolean and X-ray search builder, an email pattern generator and an outreach message checker.">
 <meta name="author" content="Denys Dinkevych">
@@ -14,7 +15,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://sourcingden.github.io/sitec/tools/og-tools.png">
 <link rel="canonical" href="https://sourcingden.github.io/sitec/tools/">
-<meta name="theme-color" content="#f4f1e9">
+<meta name="theme-color" content="#f6f6f3">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="manifest" href="../manifest.webmanifest">
@@ -23,56 +24,71 @@
 <link rel="stylesheet" href="../styles.css">
 </head>
 <body id="top" class="sub">
-<div class="stars" aria-hidden="true"><div class="stars-layer"></div><div class="stars-layer"></div><div class="stars-layer"></div></div>
+<a class="skip" href="#main">Skip to content</a>
 
 <header class="bar">
   <div class="wrap bar-inner">
-    <a class="me" href="../?side=day" aria-label="Denys Dinkevych — home">
-      <img src="../assets/avatar.webp" width="32" height="32" alt="">
-      <span>Denys Dinkevych</span>
+    <a class="brand" href="../" aria-label="Denys Dinkevych — home">
+      <img src="../assets/avatar.webp" width="34" height="34" alt="">
+      <span class="brand-name">Denys Dinkevych<small class="mono">Talent Sourcing Lead</small></span>
     </a>
-    <nav class="subnav" aria-label="Site">
+    <nav class="nav" id="nav" aria-label="Site">
       <a href="../tools/" aria-current="page">Tools</a>
       <a href="../cases/">Cases</a>
-      <a href="../?side=night">DJ</a>
+      <a href="../#experience">Experience</a>
+      <a href="../cv/">CV</a>
+      <a class="nav-cross" href="../dj/">diskevich</a>
     </nav>
-    <a class="btn btn-primary bar-cta" href="https://t.me/sourcingdenis" target="_blank" rel="noopener">Message on Telegram</a>
+    <a class="btn btn-primary bar-cta" href="../#contact"><span class="long">Get in touch</span><span class="short">Contact</span></a>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
   </div>
 </header>
 
 <main id="main" class="wrap">
 
   <section class="page-head">
-    <p class="eyebrow mono">Tools</p>
+    <p class="crumbs mono">Tools</p>
     <h1>Small tools for sourcers</h1>
-    <p class="lede">Things I use every week, rebuilt as free pages. <p class="privacy mono">Runs entirely in your browser. Nothing you type is sent anywhere.</p></p>
+    <p class="lede">Things I use every week, rebuilt as free pages.</p>
+    <p class="privacy mono">Runs entirely in your browser. Nothing you type is sent anywhere.</p>
   </section>
   <div class="tool-grid">
     <a class="tool-card" href="boolean/">
       <p class="mono tag">Search</p>
       <h2>Boolean &amp; X-ray builder</h2>
       <p>Titles, skills and excludes in; LinkedIn, Google X-ray, GitHub and Stack Overflow strings out.</p>
+      <code class="sample">("Backend Engineer" OR "Backend Developer") AND Go AND Kubernetes NOT recruiter</code>
       <span class="go" aria-hidden="true">Open →</span>
     </a>
     <a class="tool-card" href="email-patterns/">
       <p class="mono tag">Contact</p>
       <h2>Email pattern generator</h2>
       <p>Name + company domain → the 12 most common corporate email formats. Transliterates Ukrainian names.</p>
+      <code class="sample">denys.dinkevych@acme.io<br>ddinkevych@acme.io<br>denys@acme.io</code>
       <span class="go" aria-hidden="true">Open →</span>
     </a>
     <a class="tool-card" href="outreach-check/">
       <p class="mono tag">Outreach</p>
       <h2>Outreach message checker</h2>
       <p>Paste a first message, get a score and concrete fixes: length, clichés, placeholders, the closing question.</p>
+      <code class="sample">Score /100<br>✓ what passed · ✗ what to fix, and how</code>
       <span class="go" aria-hidden="true">Open →</span>
     </a>
   </div>
+
+  <section class="block">
+    <div class="pitch band-ink">
+      <p>These are the small pieces. The bigger ones — metrics, bonus models, AI sourcing tooling for a whole team — are in the case studies.</p>
+      <div class="actions"><a class="btn btn-primary" href="../cases/">See the case studies →</a><a class="btn btn-ghost" href="../#contact">Get in touch</a></div>
+    </div>
+  </section>
 
 </main>
 
 <footer class="foot wrap">
   <p class="mono" id="clock">Kyiv</p>
-  <p class="mono small"><a href="../?side=day">← Denys Dinkevych</a> · Last updated September 2026</p>
+  <a class="cross" href="../dj/"><span class="disc" aria-hidden="true"></span>By night I play records as diskevich →</a>
+  <p class="mono">Updated September 2026</p>
 </footer>
 
 <script src="../site.js" defer></script>

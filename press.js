@@ -34,17 +34,24 @@
         `<li><a href="${esc(m.url)}" ${ext}><span>${esc(m.label)}</span><em>${esc(m.title)}</em><small class="mono">${fmtK(m.plays)} plays</small></a></li>`);
       fill("press-coverage", p.press, (a) =>
         `<li><a href="${esc(a.url)}" ${ext}><span>${esc(a.title)}</span><em>${esc(a.outlet)} · ${esc(a.date.slice(0, 4))}</em></a></li>`);
-      // gigs: newest first; "Upcoming" is decided in the browser, so it drops off by itself after the date
+      // gigs: upcoming soonest first, past newest first. "Upcoming" is decided in the browser,
+      // so a gig moves to the past list by itself the day after it happens
       const today = new Date().toLocaleDateString("sv"); // YYYY-MM-DD, local time
       const day = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
-      const gigs = [...(p.gigs || [])].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-      for (const id of ["press-gigs", "home-gigs"]) fill(id, gigs, (g) => {
-        if (typeof g === "string") return `<li><span>${esc(g)}</span></li>`;
-        const soon = g.date >= today ? ' <b class="soon mono">Upcoming</b>' : "";
+      const gigs = (p.gigs || []).filter((g) => g && typeof g === "object");
+      const upcoming = gigs.filter((g) => g.date >= today).sort((a, b) => a.date.localeCompare(b.date));
+      const past = gigs.filter((g) => !(g.date >= today)).sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+      const gig = (g) => {
         const when = g.date ? day.format(new Date(g.date + "T00:00:00Z")) : "";
-        const inner = `<span>${esc(g.title)}${soon}</span><em>${esc([g.venue, g.city].filter(Boolean).join(" · "))}</em><small class="mono">${esc(when)}</small>`;
+        const inner = `<span>${esc(g.title)}</span><em>${esc([g.venue, g.city].filter(Boolean).join(" · "))}</em><small class="mono">${esc(when)}</small>`;
         return g.url ? `<li><a href="${esc(g.url)}" ${ext}>${inner}</a></li>` : `<li><div class="row">${inner}</div></li>`;
-      });
+      };
+      fill("gigs-upcoming", upcoming, gig);
+      fill("gigs-past", past, gig);
+      const none = document.getElementById("gigs-none");
+      if (none) none.hidden = upcoming.length > 0;
+      const pastBox = document.getElementById("gigs-past-box");
+      if (pastBox) pastBox.hidden = !past.length;
       fill("press-rider", p.rider, (r) => `<li>${esc(r)}</li>`);
       // Instagram posts: click-to-load, so nothing from Instagram loads until a visitor asks for it
       const codes = (p.instagramPosts || []).map((u) => (String(u).match(/instagram\.com\/(?:p|reel)\/([A-Za-z0-9_-]+)/) || [])[1]).filter(Boolean);
